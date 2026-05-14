@@ -233,8 +233,58 @@ def convert_math_envs(text: str) -> str:
         lambda m: "$" + m.group(1).strip() + "$",
         text,
     )
-    # Drop \label{} inside math
+    # Drop numbering / cross-ref macros that KaTeX rejects mid-expression.
+    # \label{} is the main offender — KaTeX surfaces it as "Missing or
+    # unrecognized delimiter for \left" because it parses \label as a function
+    # mid-expression and loses track of the surrounding delimiters.
     text = re.sub(r"\\label\s*\{[^}]+\}", "", text)
+    text = re.sub(r"\\notag\b", "", text)
+    text = re.sub(r"\\nonumber\b", "", text)
+    return text
+
+
+def harden_math_braces(text: str) -> str:
+    """Make math survive GitHub-style Markdown rendering.
+
+    Three patterns to fix inside `$..$` / `$$..$$`:
+
+    1. `\\{` / `\\}` → `\\lbrace` / `\\rbrace`. Markdown's escape pass turns
+       `\\{` into a literal `{`, which KaTeX then sees as `\\left{` (no
+       delimiter) and reports "Missing or unrecognized delimiter for \\left".
+
+    2. Whitespace before `_{` / `^{` is collapsed. A leading underscore
+       after a space (`\\Pi _{1}`) looks like an italic-span start to
+       Markdown, which drops it, leaving `\\Pi {1}`. LaTeX renders
+       `\\Pi _{1}` and `\\Pi_{1}` identically — removing the space removes
+       the italic trigger.
+
+    3. `\\\\` (aligned-env row separator) → `\\cr`. Markdown's escape pass
+       turns `\\\\` into a single `\\`, which KaTeX no longer recognises
+       as a row break. `\\cr` is a KaTeX-supported alias that Markdown
+       leaves alone.
+
+    Both regexes use `(?<!\\$)` / `(?!\\$)` guards: a `$` adjacent to another
+    `$` is part of a $$..$$ marker, never an inline delimiter. Without those
+    guards the inline regex latches onto the inner `$` of `$$..$$` and
+    mis-parses across display-math boundaries.
+    """
+    def swap_in_math(body: str) -> str:
+        body = body.replace(r"\{", r"\lbrace ").replace(r"\}", r"\rbrace ")
+        body = re.sub(r"(?<=\S)[ \t]+(?=[_^]\{)", "", body)
+        body = re.sub(r"(?<!\\)\\\\(?!\\)", r"\\cr ", body)
+        return body
+
+    text = re.sub(
+        r"\$\$([\s\S]+?)\$\$",
+        lambda m: "$$" + swap_in_math(m.group(1)) + "$$",
+        text,
+    )
+    text = re.sub(
+        r"(?<!\\)(?<!\$)\$(?!\$)((?:[^$\\]|\\.)+?)(?<!\\)(?<!\$)\$(?!\$)",
+        lambda m: "$" + swap_in_math(m.group(1)) + "$",
+        text,
+        flags=re.DOTALL,
+    )
     return text
 
 
@@ -481,6 +531,9 @@ def convert_file(path: Path, in_appendix: bool, refs: dict, fig: dict, tab: dict
     text = convert_sections(text, in_appendix)
     text = convert_inline(text)
     text = fix_accents(text)
+    # Run brace-hardening AFTER inline conversion (which handles \$, \%, etc.
+    # via with_math_masked) so we don't touch escapes outside of math.
+    text = harden_math_braces(text)
     text = whitespace(text)
     return text
 
