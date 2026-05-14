@@ -670,6 +670,11 @@
     }
 
     for (const s of sections) {
+      // Skip level-3 subsubsections in the sidebar TOC — they're paragraph
+      // dividers (e.g., the per-characteristic-group headers in Appendix B)
+      // and add noise without aiding navigation. They stay in metadata and
+      // paper.md so the model can still locate them.
+      if (s.level >= 3) continue;
       const bucket = s.in_appendix ? "app" : "main";
       if (bucket !== lastBucket) {
         addLabel(bucket === "main" ? "Main paper" : "Internet Appendix");
@@ -680,22 +685,18 @@
           mainTop++;
           mainSub = 0;
           addItem(ROMAN[mainTop] + ".", s.title, 0);
-        } else if (s.level === 2) {
+        } else {
           addItem(ALPHA[mainSub] + ".", s.title, 1);
           mainSub++;
-        } else {
-          addItem("", s.title, 2);
         }
       } else {
         if (s.level === 1) {
           appTop++;
           appSub = 0;
           addItem(ALPHA[appTop] + ".", s.title, 0);
-        } else if (s.level === 2) {
+        } else {
           appSub++;
           addItem(appSub + ".", s.title, 1);
-        } else {
-          addItem("", s.title, 2);
         }
       }
     }
