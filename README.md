@@ -7,7 +7,6 @@ the full paper text, the cited references, the table data, and a curated
 subset of the replication code into the model's context every turn, so answers
 stay grounded in the paper rather than the model's training data.
 
-→ **Live (standalone):** <https://whitesphd.github.io/paper-companion-jfqa-ipca/chat/>
 → **Embedded:** opens as a modal from the publication page at
   <https://www.whitesphd.com/publications/pub1/>
 
