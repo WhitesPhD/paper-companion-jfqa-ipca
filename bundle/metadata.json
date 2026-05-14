@@ -1,0 +1,826 @@
+{
+  "title": "Mispricing and Risk Compensation in Cryptocurrency Returns",
+  "authors": [
+    {
+      "name": "Mykola Babiak",
+      "affiliation": "Lancaster University Management School",
+      "email": "m.babiak@lancaster.ac.uk",
+      "corresponding": true
+    },
+    {
+      "name": "Daniele Bianchi",
+      "affiliation": "School of Economics and Finance, Queen Mary University of London",
+      "email": "d.bianchi@qmul.ac.uk",
+      "corresponding": false
+    }
+  ],
+  "journal": "Journal of Financial and Quantitative Analysis",
+  "year_online": 2025,
+  "year_issue": 2026,
+  "doi": "10.1017/S0022109025102329",
+  "dataverse_doi": "10.7910/DVN/IQR5DH",
+  "abstract": "We examine the role of systematic mispricing and risk compensation in explaining cryptocurrency returns using instrumented principal component analysis. We demonstrate that both elements make meaningful contributions to the variation in returns through distinct economic mechanisms. Mispricing primarily operates through behavioral channels, capturing speculative demand and liquidity frictions. A pure-alpha strategy delivers large and significant Sharpe ratios, confirming the economic importance of mispricing. Risk compensation is driven by fundamental factors, including past performance and exposures to both cryptocurrency and equity market risk. Consistent with this equity exposure, we document increasing correlation between cryptocurrency and equity returns over time.",
+  "sections": [
+    {
+      "id": "sec-introduction",
+      "level": 1,
+      "title": "Introduction",
+      "label": "sec:intro",
+      "line": 142,
+      "in_appendix": false
+    },
+    {
+      "id": "sec-data-and-empirical-design",
+      "level": 1,
+      "title": "Data and Empirical Design",
+      "label": "subsec:Data",
+      "line": 164,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-a-brief-review-of-instrumented-pca",
+      "level": 2,
+      "title": "A Brief Review of Instrumented PCA",
+      "label": "sec:ipca",
+      "line": 182,
+      "in_appendix": false
+    },
+    {
+      "id": "sec-main-empirical-results",
+      "level": 1,
+      "title": "Main Empirical Results",
+      "label": "sec:mispricing",
+      "line": 209,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-asset-pricing-performance",
+      "level": 2,
+      "title": "Asset Pricing Performance",
+      "label": "subsec:asset pricing",
+      "line": 214,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-economic-evaluation-of-mispricing",
+      "level": 2,
+      "title": "Economic Evaluation of Mispricing",
+      "label": "subsec:economic importance",
+      "line": 242,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-which-characteristics-matter-for-alphas-and-betas",
+      "level": 2,
+      "title": "Which Characteristics Matter for Alphas and Betas?",
+      "label": "sec:matter",
+      "line": 253,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-asset-quality-and-model-performance",
+      "level": 2,
+      "title": "Asset Quality and Model Performance",
+      "label": "subsec:asset quality",
+      "line": 301,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-additional-checks",
+      "level": 2,
+      "title": "Additional Checks",
+      "label": "sub:robustness",
+      "line": 318,
+      "in_appendix": false
+    },
+    {
+      "id": "sec-interpreting-the-ipca-factors",
+      "level": 1,
+      "title": "Interpreting the IPCA Factors",
+      "label": "sec:interpreting",
+      "line": 339,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-latent-factors-and-characteristic-managed-portfolios",
+      "level": 2,
+      "title": "Latent Factors and Characteristic-Managed Portfolios",
+      "label": "subsec:managed portfolios",
+      "line": 344,
+      "in_appendix": false
+    },
+    {
+      "id": "subsec-correlation-with-equity-risk-factors",
+      "level": 2,
+      "title": "Correlation With Equity Risk Factors",
+      "label": "subsec:equity correlation",
+      "line": 360,
+      "in_appendix": false
+    },
+    {
+      "id": "sec-conclusion",
+      "level": 1,
+      "title": "Conclusion",
+      "label": "sec:Conclusion",
+      "line": 399,
+      "in_appendix": false
+    },
+    {
+      "id": "app-sec-data-cleaning",
+      "level": 1,
+      "title": "Data Cleaning",
+      "label": "sec:AppendixA",
+      "line": 22,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-original-sources",
+      "level": 2,
+      "title": "Original Sources",
+      "label": "",
+      "line": 27,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-data-pre-processing",
+      "level": 2,
+      "title": "Data Pre-Processing",
+      "label": "",
+      "line": 35,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-daily-returns-of-individual-cryptocurrencies",
+      "level": 2,
+      "title": "Daily Returns of Individual Cryptocurrencies",
+      "label": "appendix: summary stats of the final sample",
+      "line": 64,
+      "in_appendix": true
+    },
+    {
+      "id": "app-sec-cryptocurrency-characteristics-and-observable-factors",
+      "level": 1,
+      "title": "Cryptocurrency Characteristics and Observable Factors",
+      "label": "sec:AppendixB",
+      "line": 73,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-cryptocurrency-characteristics",
+      "level": 2,
+      "title": "Cryptocurrency Characteristics",
+      "label": "",
+      "line": 76,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-market-size-and-momentum",
+      "level": 3,
+      "title": "Market, size, and momentum",
+      "label": "",
+      "line": 80,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-reversal",
+      "level": 3,
+      "title": "Reversal",
+      "label": "",
+      "line": 88,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-on-chain-activity",
+      "level": 3,
+      "title": "On-chain activity",
+      "label": "",
+      "line": 98,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-trading-activity",
+      "level": 3,
+      "title": "Trading activity",
+      "label": "",
+      "line": 106,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-liquidity",
+      "level": 3,
+      "title": "Liquidity",
+      "label": "",
+      "line": 116,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-speculative-demand",
+      "level": 3,
+      "title": "Speculative demand",
+      "label": "",
+      "line": 126,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-volatility-and-downside-risk",
+      "level": 3,
+      "title": "Volatility and downside risk",
+      "label": "",
+      "line": 137,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-social-media-activity",
+      "level": 3,
+      "title": "Social media activity",
+      "label": "",
+      "line": 147,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsubsec-equity-market-exposure",
+      "level": 3,
+      "title": "Equity market exposure",
+      "label": "",
+      "line": 157,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-observable-factors",
+      "level": 2,
+      "title": "Observable Factors",
+      "label": "",
+      "line": 167,
+      "in_appendix": true
+    },
+    {
+      "id": "app-sec-testing-performance-differentials",
+      "level": 1,
+      "title": "Testing Performance Differentials",
+      "label": "sec:testing delta",
+      "line": 183,
+      "in_appendix": true
+    },
+    {
+      "id": "app-sec-additional-empirical-results",
+      "level": 1,
+      "title": "Additional Empirical Results",
+      "label": "sec:AppendixC",
+      "line": 210,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-bootstrap-tests",
+      "level": 2,
+      "title": "Bootstrap Tests",
+      "label": "sec: bootstrap tests appendix",
+      "line": 214,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-relative-importance-of-characteristics",
+      "level": 2,
+      "title": "Relative Importance of Characteristics",
+      "label": "sec:economic appendix",
+      "line": 252,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-approximating-the-ipca-factor-model",
+      "level": 2,
+      "title": "Approximating the IPCA Factor Model",
+      "label": "sec:choosing factors",
+      "line": 269,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-asset-quality-and-asset-pricing-performance-on-a-weekly-freq",
+      "level": 2,
+      "title": "Asset Quality and Asset Pricing Performance on a Weekly Frequency",
+      "label": "sec:performance app",
+      "line": 282,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-volatility-scaling-and-asset-pricing-performance",
+      "level": 2,
+      "title": "Volatility Scaling and Asset Pricing Performance",
+      "label": "subsec:volatility scaling",
+      "line": 293,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-results-for-individual-exchanges",
+      "level": 2,
+      "title": "Results for Individual Exchanges",
+      "label": "subsec:individual exchanges",
+      "line": 304,
+      "in_appendix": true
+    },
+    {
+      "id": "app-subsec-augmented-ipca-with-equity-factors",
+      "level": 2,
+      "title": "Augmented IPCA with Equity Factors",
+      "label": "subsec:equity",
+      "line": 317,
+      "in_appendix": true
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig1",
+      "label": "fig: significance of daily alphas over time",
+      "caption_short": "Bootstrap Statistics for Daily Alphas over Time",
+      "description": "This figure illustrates the daily Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional alphas from an eight-factor IPCA model estimated on daily returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "All characteristics",
+          "original_file": "Figure1a_alpha_significance_daily_K=8_2yr.png",
+          "file": "fig1_a.png"
+        },
+        {
+          "label": "Liquidity",
+          "original_file": "Figure1b_alpha_significance_daily_K=8_M5_2yr.png",
+          "file": "fig1_b.png"
+        },
+        {
+          "label": "Speculative demand",
+          "original_file": "Figure1c_alpha_significance_daily_K=8_M6_2yr.png",
+          "file": "fig1_c.png"
+        },
+        {
+          "label": "Volatility and downside risk",
+          "original_file": "Figure1d_alpha_significance_daily_K=8_M7_2yr.png",
+          "file": "fig1_d.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "fig2",
+      "label": "fig: significance of weekly alphas over time",
+      "caption_short": "Bootstrap Statistics for Weekly Alphas over Time",
+      "description": "This figure illustrates the weekly Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional alphas from an eight-factor IPCA model estimated on weekly returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "All characteristics",
+          "original_file": "Figure2a_alpha_significance_weekly_K=8_2yr.png",
+          "file": "fig2_a.png"
+        },
+        {
+          "label": "Reversal",
+          "original_file": "Figure2b_alpha_significance_weekly_K=8_M2_2yr.png",
+          "file": "fig2_b.png"
+        },
+        {
+          "label": "Speculative demand",
+          "original_file": "Figure2c_alpha_significance_weekly_K=8_M6_2yr.png",
+          "file": "fig2_c.png"
+        },
+        {
+          "label": "Volatility and downside risk",
+          "original_file": "Figure2d_alpha_significance_weekly_K=8_M7_2yr.png",
+          "file": "fig2_d.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "fig3",
+      "label": "fig: significance of daily betas over time",
+      "caption_short": "Bootstrap Statistics for Daily Betas over Time",
+      "description": "This figure illustrates the daily Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional betas from an eight-factor IPCA model estimated on daily returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "Market, size, momentum",
+          "original_file": "Figure3a_beta_significance_daily_K=8_M1_2yr.png",
+          "file": "fig3_a.png"
+        },
+        {
+          "label": "Speculative demand",
+          "original_file": "Figure3b_beta_significance_daily_K=8_M6_2yr.png",
+          "file": "fig3_b.png"
+        },
+        {
+          "label": "Volatility and downside risk",
+          "original_file": "Figure3c_beta_significance_daily_K=8_M7_2yr.png",
+          "file": "fig3_c.png"
+        },
+        {
+          "label": "Equity market exposure",
+          "original_file": "Figure3d_beta_significance_daily_K=8_M9_2yr.png",
+          "file": "fig3_d.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "fig4",
+      "label": "fig: significance of weekly betas over time",
+      "caption_short": "Bootstrap Statistics for Weekly Betas over Time",
+      "description": "This figure illustrates the weekly Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional betas from an eight-factor IPCA model estimated on weekly returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "Market, size, momentum",
+          "original_file": "Figure4a_beta_significance_weekly_K=8_M1_2yr.png",
+          "file": "fig4_a.png"
+        },
+        {
+          "label": "Reversal",
+          "original_file": "Figure4b_beta_significance_weekly_K=8_M2_2yr.png",
+          "file": "fig4_b.png"
+        },
+        {
+          "label": "Trading activity",
+          "original_file": "Figure4c_beta_significance_weekly_K=8_M4_2yr.png",
+          "file": "fig4_c.png"
+        },
+        {
+          "label": "Equity market exposure",
+          "original_file": "Figure4d_beta_significance_weekly_K=8_M9_2yr.png",
+          "file": "fig4_d.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "fig5",
+      "label": "fig:marginal_R2",
+      "caption_short": "Characteristic-Managed Portfolios and IPCA Latent Factors",
+      "description": "Panel A shows the marginal $R^2,$ which are $R^2$ statistics from univariate regressions of each of the 35 characteristic-managed portfolios on each latent factor. Panel B shows the regression coefficients of a series of multivariate regressions in which all latent factors are projected onto each characteristic-managed portfolio.",
+      "files": [
+        {
+          "label": "",
+          "original_file": "Figure5.png",
+          "file": "fig5.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "fig6",
+      "label": "fig:pvalue rolling",
+      "caption_short": "Rolling-Window P-Values for Equity Factor Correlations",
+      "description": "Panel A shows the p-values from rolling 2-year window regressions of IPCA factors F6 and F7 on the market factor (MKT). Panel B shows the p-values from rolling 2-year window regressions of the same factors on the value factor (HML). The dashed horizontal lines indicate conventional significance thresholds of 5\\% (red) and 10\\% (orange).",
+      "files": [
+        {
+          "label": "",
+          "original_file": "Figure6.png",
+          "file": "fig6.png"
+        }
+      ],
+      "in_appendix": false
+    },
+    {
+      "id": "appfig1",
+      "label": "fig: significance of daily alphas over time app",
+      "caption_short": "Bootstrap Statistics for Daily Alphas over Time",
+      "description": "This figure illustrates the daily Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional alphas from an eight-factor IPCA model estimated on daily returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "Market, size, momentum",
+          "original_file": "AppendixFigure1a_alpha_significance_daily_K=8_M1_2yr.png",
+          "file": "appfig1_a.png"
+        },
+        {
+          "label": "Reversal",
+          "original_file": "AppendixFigure1b_alpha_significance_daily_K=8_M2_2yr.png",
+          "file": "appfig1_b.png"
+        },
+        {
+          "label": "On-chain activity",
+          "original_file": "AppendixFigure1c_alpha_significance_daily_K=8_M3_2yr.png",
+          "file": "appfig1_c.png"
+        },
+        {
+          "label": "Trading activity",
+          "original_file": "AppendixFigure1d_alpha_significance_daily_K=8_M4_2yr.png",
+          "file": "appfig1_d.png"
+        },
+        {
+          "label": "Social media activity",
+          "original_file": "AppendixFigure1e_alpha_significance_daily_K=8_M8_2yr.png",
+          "file": "appfig1_e.png"
+        },
+        {
+          "label": "Equity market exposure",
+          "original_file": "AppendixFigure1f_alpha_significance_daily_K=8_M9_2yr.png",
+          "file": "appfig1_f.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig2",
+      "label": "fig: significance of weekly alphas over time app",
+      "caption_short": "Bootstrap Statistics for Weekly Alphas over Time",
+      "description": "This figure illustrates the weekly Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional alphas from an eight-factor IPCA model estimated on weekly returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "Market, size, momentum",
+          "original_file": "AppendixFigure2a_alpha_significance_weekly_K=8_M1_2yr.png",
+          "file": "appfig2_a.png"
+        },
+        {
+          "label": "On-chain activity",
+          "original_file": "AppendixFigure2b_alpha_significance_weekly_K=8_M3_2yr.png",
+          "file": "appfig2_b.png"
+        },
+        {
+          "label": "Trading activity",
+          "original_file": "AppendixFigure2c_alpha_significance_weekly_K=8_M4_2yr.png",
+          "file": "appfig2_c.png"
+        },
+        {
+          "label": "Liquidity",
+          "original_file": "AppendixFigure2d_alpha_significance_weekly_K=8_M5_2yr.png",
+          "file": "appfig2_d.png"
+        },
+        {
+          "label": "Social media activity",
+          "original_file": "AppendixFigure2e_alpha_significance_weekly_K=8_M8_2yr.png",
+          "file": "appfig2_e.png"
+        },
+        {
+          "label": "Equity market exposure",
+          "original_file": "AppendixFigure2f_alpha_significance_weekly_K=8_M9_2yr.png",
+          "file": "appfig2_f.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig3",
+      "label": "fig: significance of daily betas over time app",
+      "caption_short": "Bootstrap Statistics for Daily Betas over Time",
+      "description": "This figure illustrates the daily Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional betas from an eight-factor IPCA model estimated on daily returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "Reversal",
+          "original_file": "AppendixFigure3a_beta_significance_daily_K=8_M2_2yr.png",
+          "file": "appfig3_a.png"
+        },
+        {
+          "label": "On-chain activity",
+          "original_file": "AppendixFigure3b_beta_significance_daily_K=8_M3_2yr.png",
+          "file": "appfig3_b.png"
+        },
+        {
+          "label": "Trading activity",
+          "original_file": "AppendixFigure3c_beta_significance_daily_K=8_M4_2yr.png",
+          "file": "appfig3_c.png"
+        },
+        {
+          "label": "Liquidity",
+          "original_file": "AppendixFigure3d_beta_significance_daily_K=8_M5_2yr.png",
+          "file": "appfig3_d.png"
+        },
+        {
+          "label": "Social media activity",
+          "original_file": "AppendixFigure3e_beta_significance_daily_K=8_M8_2yr.png",
+          "file": "appfig3_e.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig4",
+      "label": "fig: significance of weekly betas over time app",
+      "caption_short": "Bootstrap Statistics for Weekly Betas over Time",
+      "description": "This figure illustrates the weekly Wald-type test statistics (black line) and different percentiles of bootstrap statistics (grey areas) for the conditional betas from an eight-factor IPCA model estimated on weekly returns in a two-year rolling window.",
+      "files": [
+        {
+          "label": "On-chain activity",
+          "original_file": "AppendixFigure4a_beta_significance_weekly_K=8_M3_2yr.png",
+          "file": "appfig4_a.png"
+        },
+        {
+          "label": "Liquidity",
+          "original_file": "AppendixFigure4b_beta_significance_weekly_K=8_M5_2yr.png",
+          "file": "appfig4_b.png"
+        },
+        {
+          "label": "Speculative demand",
+          "original_file": "AppendixFigure4c_beta_significance_weekly_K=8_M6_2yr.png",
+          "file": "appfig4_c.png"
+        },
+        {
+          "label": "Volatility and downside risk",
+          "original_file": "AppendixFigure4d_beta_significance_weekly_K=8_M7_2yr.png",
+          "file": "appfig4_d.png"
+        },
+        {
+          "label": "Social media activity",
+          "original_file": "AppendixFigure4e_beta_significance_weekly_K=8_M8_2yr.png",
+          "file": "appfig4_e.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig5",
+      "label": "fig:beta bootstrap individual characteristics app",
+      "caption_short": "Beta Bootstrap Test for Individual Characteristics",
+      "description": "This figure summarises the results of the bootstrap test for the significance of individual characteristics in the IPCA specifications with eight latent factors. We report the bootstrap p-values for both daily and weekly returns.",
+      "files": [
+        {
+          "label": "",
+          "original_file": "AppendixFigure5.png",
+          "file": "appfig5.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig6",
+      "label": "fig:char importance tv",
+      "caption_short": "Relative Importance of Characteristics for Alphas and Betas over Time",
+      "description": "This figure illustrates the contributions of groups to the sum of squared alpha parameters and the weighted sum of squared beta parameters calculated based on daily or weekly returns. The figure reports the results for the IPCA model with eight factors and all characteristics used as instruments. { Panel A: Daily returns} { Panel B: Weekly returns}",
+      "files": [
+        {
+          "label": "Contribution to $\\Gamma_\\alpha^{'} \\Gamma_\\alpha$",
+          "original_file": "AppendixFigure6a.png",
+          "file": "appfig6_a.png"
+        },
+        {
+          "label": "Contribution to $tr(\\Gamma_\\beta S_f \\Gamma_\\beta^{'})$",
+          "original_file": "AppendixFigure6b.png",
+          "file": "appfig6_b.png"
+        },
+        {
+          "label": "Contribution to $\\Gamma_\\alpha^{'} \\Gamma_\\alpha$",
+          "original_file": "AppendixFigure6c.png",
+          "file": "appfig6_c.png"
+        },
+        {
+          "label": "Contribution to $tr(\\Gamma_\\beta S_f \\Gamma_\\beta^{'})$",
+          "original_file": "AppendixFigure6d.png",
+          "file": "appfig6_d.png"
+        }
+      ],
+      "in_appendix": true
+    },
+    {
+      "id": "appfig7",
+      "label": "fig:MP approximation",
+      "caption_short": "Approximating IPCA with Characteristic-Managed Portfolios",
+      "description": "This figure illustrates the adjusted $R^2$ statistics from time-series regressions of IPCA factors on the set of eleven managed portfolios used to proxy the IPCA performance, as described in the main text.",
+      "files": [
+        {
+          "label": "",
+          "original_file": "AppendixFigure7.png",
+          "file": "appfig7.png"
+        }
+      ],
+      "in_appendix": true
+    }
+  ],
+  "tables": [
+    {
+      "id": "tab1",
+      "label": "tab:Description",
+      "caption_short": "Cryptocurrency Characteristics",
+      "description": "This table defines 35 asset characteristics used in the empirical analysis. We group them into nine categories: market, size, and momentum; reversal; on-chain activity; trading activity; liquidity; speculative demand; volatility and downside risk; social media activity; and equity market exposure.",
+      "body_latex": "\\begin{tabular}{lll}\n\\toprule \n\\multicolumn{2}{l}{\\bf Market, size, and momentum} & \\\\\n(1) & {\\tt capm $\\beta$} & Crypto CAPM beta based on the previous 60 days of returns.\\\\ \n[.5em]\n(2) & {\\tt size} & Current available supply times the current USD price.\\\\\n[.5em]\n(3-5) & {\\tt r*\\_1} & Return from 14, 21, and 30 to one day before the prediction.\\\\\n[.5em] \n\\multicolumn{2}{l}{\\bf Reversal} & \\\\\n[.5em]\n(6) & {\\tt r2\\_1}  & Short-term reversal (it is used only for a daily frequency \\\\\n &  & and is equivalent to r7\\_1 on a weekly frequency).\\\\\n [.5em]\n(7) & {\\tt r7\\_1} & Return from 7 to one day before prediction.\\\\\n [.5em]\n(8) & {\\tt r180\\_60} & Return from 180 to 60 days before prediction.\\\\\n[.5em]\n(9) & {\\tt rel\\_to\\_high} & Price to 90-day high price. \\\\\n[.5em]\n{\\bf On-chain activity} & &\\\\\n[.5em]\n(10) & {\\tt new\\_add} & Number of unique addresses that appeared for the first time in a network.\\\\\n[.5em]\n(11) & {\\tt act\\_add} & Number of unique active addresses.\\\\\n[.5em]\n(12) & {\\tt bm} & Network-to-marke value.\\\\\n[.5em]\n{\\bf Trading activity} & &\\\\\n[.5em]\n(13) & {\\tt \\$vol} & Trading volume in \\$.\\\\\n[.5em]\n(14) & {\\tt to} & Last day's trading volume in \\$ over the current market capitalization.\\\\\n[.5em]\n(15) & {\\tt std\\_vol} & Volatility of log-daily trading volume in the previous 30 days.\\\\\n[.5em]\n(16) & {\\tt cv\\_vol} & Volatility to mean of daily trading volume in the previous 30 days. \\\\\n[.5em]\n{\\bf Liquidity} & &\\\\\n[.5em]\n(17) & {\\tt bidask} & Average of daily bid-ask spreads.\\\\\n[.5em]\n(18) & {\\tt illiq} & The 30-day average of daily ratios between the absolute return and volume.\\\\\n[.5em]\n(19) & {\\tt vol\\_shock} & Log daily trading volume minus its trend in the previous 30 days.\\\\\n[.5em]\n(20) & {\\tt dto} & De-trended volume minus market turnover.\\\\\n[.5em]\n{\\bf Speculative demand} & &\\\\\n[.5em]\n(21) & {\\tt co-skew} & Crypto co-skewness based on the previous 60 days of returns.\\\\\n[.5em]\n(22) & {\\tt max} $30$ & Maximum daily return in the previous 30 days.\\\\\n[.5em]\n(23) & {\\tt max} $30 (4)$ & Average of the four highest daily returns in the previous 30 days.\\\\\n[.5em]\n(24) & {\\tt rskew} & The realised skewness of daily returns in the previous 30 days. \\\\\n[.5em]\n\\multicolumn{2}{l}{\\bf Volatility and downside risk} &\\\\\n[.5em]\n(25) & {\\tt ivol} & Volatility of crypto CAPM residuals based on the previous 60 days of returns.\\\\\n[.5em]\n(26) & {\\tt rvol} & Realised volatility based on RiskMetrics with $\\lambda=0.94$.\\\\\n[.5em]\n(27) & {\\tt Downside $\\beta$} & Crypto downside beta based on the previous 60 days of returns.\\\\\n[.5em]\n(28) & {\\tt VaR(5\\%)} & The historical Value-at-Risk at 5\\% on the previous 90 daily returns.\\\\\n[.5em]\n{\\bf Social media activity} & &\\\\\n[.5em]\n(29) & {\\tt fb\\_likes} & The daily number of cumulative Facebook likes. \\\\\n[.5em]\n(30) & {\\tt reddit\\_act} & The number of active Reddit subscribers in a day.\\\\\n[.5em]\n(31) & {\\tt reddit\\_posts} & The daily number of Reddit posts.\\\\\n[.5em]\n(32) & {\\tt twitter\\_f} & The daily number of Twitter followers.\\\\\n[.5em]\n{\\bf Equity market exposure} & &\\\\\n[.5em]\n(33) & {\\tt Equity capm $\\beta$} & Equity CAPM beta based on the previous 60 days of returns.\\\\\n[.5em]\n(34) & {\\tt Equity co-skew} & Equity co-skewness based on the previous 60 days of returns. \\\\\n[.5em]\n(35) & {\\tt Equity downside $\\beta$} & Equity downside beta based on the previous 60 days of returns.\\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/Table1.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab2",
+      "label": "tab:Model comparison",
+      "caption_short": "Asset Pricing Performance",
+      "description": "This table compares the in-sample and out-of-sample $R^2_{tot}$ and $R^2_{pred}$ reported in percentages for models with IPCA, observable, and PCA factors. The models are estimated on daily or weekly returns. For each model, it also displays the percentage change in $R^2_{tot}$ and $R^2_{pred}$ statistics relative to the unconstrained eight-factor IPCA model, where all characteristics are used as instruments. We highlight with $^*$ those performance differentials that are statistically significant at a 1\\% threshold level.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrr}\n\\multicolumn{11}{l}{\\bf Panel A: \\normalfont In-sample estimation}\\\\\n\\midrule \n&       & \\multicolumn{4}{c}{Daily returns}     &       & \\multicolumn{4}{c}{Weekly returns} \\\\\n      \\cmidrule{3-6}\\cmidrule{8-11}\nMethod       & K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n\\midrule\n{\\tt IPCA8} (all characteristics) & 8     & 15.55 &       & 0.26  &       &       & 31.92 &       & 1.62  &  \\\\\n{\\tt IPCA8} (all characteristics) \\& $\\Gamma_\\alpha = 0$ & 8     & 15.49 & -0.43$^*$ & 0.21  & -18.11$^*$ &       & 31.84 & -0.25 & 1.61  & -0.63 \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\nInstrumented observable & 11    & 10.56 & -32.10$^*$ & 0.27  & 2.59  &       & 27.53 & -13.76$^*$ & 1.62  & 0.17 \\\\\nInstrumented observable \\& $\\Gamma_\\alpha = 0$ & 11    & 10.36 & -33.37$^*$ & 0.08  & -68.99$^*$ &       & 26.41 & -17.26$^*$ & 0.67  & -58.52$^*$ \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt PCA8} \\& $\\Gamma_\\alpha = 0$ & 8     & 17.27 & 11.03$^*$ & 0.10  & -62.20$^*$ &       & 38.45 & 20.46$^*$ & 0.67  & -58.80$^*$ \\\\\n\\midrule \n\\multicolumn{11}{l}{}\\\\\n\n\\multicolumn{11}{l}{\\bf Panel B: \\normalfont Out-of-sample estimation}\\\\\n\\midrule\n      &       & \\multicolumn{4}{c}{Daily returns}     &       & \\multicolumn{4}{c}{Weekly returns} \\\\\n      \\cmidrule{3-6}\\cmidrule{8-11}\n      Method       & K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n\\midrule\n{\\tt IPCA8} (all characteristics) & 8     & 16.06 &       & 0.23  &       &       & 29.51 &       & 1.08  &  \\\\\n{\\tt IPCA8} (all characteristics) \\& $\\Gamma_\\alpha = 0$ & 8     & 15.54 & -3.22$^*$ & 0.20  & -15.06$^*$ &       & 29.06 & -1.53$^*$ & 1.05  & -2.21 \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\nInstrumented observable & 11    & 9.88  & -38.49$^*$ & 0.24  & 2.10  &       & 23.49 & -20.42$^*$ & 1.12  & 4.39$^*$ \\\\\nInstrumented observable \\& $\\Gamma_\\alpha = 0$ & 11    & 8.24  & -48.71$^*$ & 0.05  & -78.30$^*$ &       & 22.02 & -25.40$^*$ & 0.29  & -72.94$^*$ \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt PCA8} \\& $\\Gamma_\\alpha = 0$ & 8     & 14.27 & -11.11$^*$ & -0.01 &  \\multicolumn{1}{c}{-}     &       & 25.04 & -15.18$^*$ & -0.58 & \\multicolumn{1}{c}{-} \\\\\n\\midrule \n\\end{tabular}",
+      "source_file": "Tables/Table2.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab3",
+      "label": "tab:AlphaPortfolios",
+      "caption_short": "Pure-Alpha Portfolios",
+      "description": "This table reports the out-of-sample performance of pure-alpha portfolios. Panel A (B) shows summary statistics for daily (weekly) estimation. Alphas are computed relative to the crypto CAPM, four-factor (F4), and eleven-factor (F11) models. The four-factor model employs the market, size, momentum, and value factors, whereas the eleven-factor specification additionally includes seven observable cryptocurrency factors selected in Section \\ref{sec:mispricing}.\\ref{subsec:asset pricing}.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrr}\n\\multicolumn{10}{l}{\\bf Panel A: \\normalfont Daily returns}\\\\\n\\midrule\nIPCA Factors & \\multicolumn{1}{l}{Mean (\\%)} & \\multicolumn{1}{l}{Std (\\%)} & \\multicolumn{1}{l}{SR} & \\multicolumn{1}{l}{$\\alpha_{CAPM}(\\%)$} & \\multicolumn{1}{l}{$t_{CAPM}$} & \\multicolumn{1}{l}{$\\alpha_{F4}(\\%)$} & \\multicolumn{1}{l}{$t_{F4}$} & \\multicolumn{1}{l}{$\\alpha_{F11}(\\%)$} & \\multicolumn{1}{l}{$t_{F11}$} \\\\\n\\midrule \n$K=1$   & 1.412 & 1.951 & 0.724 & 1.411 & 7.450 & 1.282 & 6.863 & 1.064 & 5.811 \\\\\n$K=2$   & 1.009 & 1.883 & 0.536 & 1.007 & 4.832 & 0.929 & 4.642 & 0.767 & 3.986 \\\\\n$K=3$   & 1.064 & 1.772 & 0.601 & 1.063 & 5.625 & 0.983 & 5.420 & 0.809 & 4.679 \\\\\n$K=4$   & 1.041 & 1.423 & 0.732 & 1.041 & 7.620 & 0.969 & 7.456 & 0.856 & 6.807 \\\\\n$K=5$   & 0.949 & 1.206 & 0.787 & 0.949 & 8.192 & 0.889 & 7.881 & 0.786 & 7.086 \\\\\n$K=6$   & 0.772 & 1.017 & 0.759 & 0.771 & 7.385 & 0.733 & 7.197 & 0.653 & 6.526 \\\\\n$K=7$   & 0.573 & 0.800 & 0.717 & 0.573 & 7.426 & 0.541 & 7.347 & 0.482 & 6.496 \\\\\n$K=8$   & 0.491 & 0.722 & 0.680 & 0.490 & 7.289 & 0.469 & 7.379 & 0.414 & 6.460 \\\\\n\\midrule\n\\multicolumn{10}{c}{}\\\\\n\\multicolumn{10}{l}{\\bf Panel B: \\normalfont Weekly returns}\\\\\n\\midrule\nIPCA Factors & \\multicolumn{1}{l}{Mean (\\%)} & \\multicolumn{1}{l}{Std (\\%)} & \\multicolumn{1}{l}{SR} & \\multicolumn{1}{l}{$\\alpha_{CAPM}(\\%)$} & \\multicolumn{1}{l}{$t_{CAPM}$} & \\multicolumn{1}{l}{$\\alpha_{F4}(\\%)$} & \\multicolumn{1}{l}{$t_{F4}$} & \\multicolumn{1}{l}{$\\alpha_{F11}(\\%)$} & \\multicolumn{1}{l}{$t_{F11}$} \\\\\n\\midrule \n$K=1$   & 1.092 & 1.485 & 0.736 & 1.086 & 12.791 & 1.083 & 12.977 & 1.072 & 15.456 \\\\\n$K=2$   & 1.023 & 1.332 & 0.768 & 1.021 & 8.918 & 1.019 & 8.682 & 1.046 & 10.308 \\\\\n$K=3$   & 1.002 & 1.343 & 0.746 & 1.002 & 7.603 & 1.002 & 7.465 & 1.026 & 9.163 \\\\\n$K=4$   & 1.003 & 1.318 & 0.761 & 1.002 & 8.987 & 1.002 & 8.711 & 1.027 & 10.708 \\\\\n$K=5$   & 0.953 & 1.229 & 0.775 & 0.953 & 9.098 & 0.951 & 8.710 & 0.973 & 10.673 \\\\\n$K=6$   & 0.875 & 1.085 & 0.807 & 0.879 & 9.371 & 0.873 & 9.073 & 0.883 & 11.589 \\\\\n$K=7$   & 0.765 & 1.043 & 0.734 & 0.768 & 8.074 & 0.764 & 7.730 & 0.771 & 10.407 \\\\\n$K=8$   & 0.746 & 0.977 & 0.764 & 0.748 & 10.363 & 0.741 & 9.854 & 0.755 & 13.964 \\\\\n\\midrule \n\\end{tabular}",
+      "source_file": "Tables/Table3.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab4",
+      "label": "tab:AlphaGroups",
+      "caption_short": "Characteristics and Systematic Mispricing",
+      "description": "This table reports p-values for the $\\Gamma_\\alpha^g = 0$ test in models with different numbers of factors, using all characteristics as instruments. The table shows the results for models estimated on daily and weekly returns.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrr}\n\\bf Panel A: \\normalfont Daily returns &  &  \\\\\n\\midrule\nGroups& \\multicolumn{1}{l}{L} &  \\multicolumn{8}{c}{Number of factors} \\\\\n\\cmidrule{3-10}\n&    &  1     & 2     & 3     & 4     & 5     & 6     & 7     & 8 \\\\\n\\midrule         \nAll characteristics & 35    & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.01  & 0.01  & 0.03 \\\\\n[0.5em]\nMarket, size and momentum & 5     & 0.00  & 0.00  & 0.01  & 0.54  & 0.32  & 0.43  & 0.64  & 0.95 \\\\\nReversal & 9     & 0.00  & 0.01  & 0.06  & 0.10  & 0.14  & 0.15  & 0.19  & 0.25 \\\\\nOn-chain activity & 8     & 0.04  & 0.17  & 0.46  & 0.48  & 0.48  & 0.63  & 0.73  & 0.63 \\\\\nTrading activity & 9     & 0.03  & 0.56  & 0.68  & 0.48  & 0.49  & 0.95  & 0.99  & 0.98 \\\\\nLiquidity & 9     & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\\\\nSpeculative demand & 9     & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.02  & 0.05  & 0.04 \\\\\nVolatility and downside risk & 9     & 0.00  & 0.01  & 0.00  & 0.03  & 0.07  & 0.19  & 0.37  & 0.82 \\\\\nSocial media activity & 9     & 0.00  & 0.00  & 0.00  & 0.01  & 0.04  & 0.23  & 0.19  & 0.10 \\\\\nEquity market exposure& 8     & 0.22  & 0.40  & 0.43  & 0.52  & 0.52  & 0.93  & 0.96  & 0.89 \\\\\n\\midrule\n\\multicolumn{10}{c}{}\\\\\n\\bf Panel B: \\normalfont Weekly returns &  &  \\\\\n\\midrule\nGroups& \\multicolumn{1}{l}{L} &  \\multicolumn{8}{c}{Number of factors} \\\\\n\\cmidrule{3-10}\n&    &  1     & 2     & 3     & 4     & 5     & 6     & 7     & 8 \\\\\n\\midrule     \nAll characteristics & 34    & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\\\\n[0.5em]\nMarket, size and momentum & 5     & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.07  & 0.32  & 0.69 \\\\\nReversal & 8     & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00  & 0.00 \\\\\nOn-chain activity & 8     & 0.22  & 0.19  & 0.21  & 0.07  & 0.07  & 0.16  & 0.24  & 0.54 \\\\\nTrading activity & 9     & 0.58  & 0.70  & 0.67  & 0.47  & 0.49  & 0.59  & 0.70  & 0.82 \\\\\nLiquidity & 9     & 0.03  & 0.02  & 0.02  & 0.01  & 0.02  & 0.16  & 0.10  & 0.08 \\\\\nSpeculative demand & 9     & 0.12  & 0.04  & 0.02  & 0.01  & 0.10  & 0.07  & 0.06  & 0.02 \\\\\nVolatility and downside risk & 9     & 0.32  & 0.25  & 0.31  & 0.24  & 0.44  & 0.37  & 0.21  & 0.12 \\\\\nSocial media activity & 9     & 0.07  & 0.08  & 0.11  & 0.14  & 0.10  & 0.09  & 0.47  & 0.39 \\\\\nEquity market exposure& 8     & 0.97  & 0.80  & 0.81  & 0.77  & 0.85  & 0.34  & 0.34  & 0.25 \\\\\n\\midrule\n\\end{tabular}",
+      "source_file": "Tables/Table4.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab5",
+      "label": "tab:Beta bootstrap groups",
+      "caption_short": "Characteristics and Risk Compensation",
+      "description": "This table reports p-values for the $\\Gamma_\\beta^g = 0$ test in the models with different numbers of factors where all characteristics are used as instruments. The table shows the results for the models estimated on daily (Panel A) or weekly (Panel B) returns.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrr}\n\\bf Panel A: \\normalfont Daily returns &  &  \\\\\n\\midrule\nGroups& \\multicolumn{1}{l}{L} &  \\multicolumn{8}{c}{Number of factors} \\\\\n\\cmidrule{3-10}\n&    &  1     & 2     & 3     & 4     & 5     & 6     & 7     & 8 \\\\\n\\midrule\nMarket, size and momentum & 5     & 0.00  & 0.08  & 0.05  & 0.01  & 0.02  & 0.04  & 0.05  & 0.04 \\\\\nReversal & 9     & 0.01  & 0.21  & 0.62  & 0.22  & 0.19  & 0.38  & 0.54  & 0.75 \\\\\nOn-chain activity & 8     & 0.06  & 0.29  & 0.61  & 0.80  & 0.93  & 0.99  & 0.96  & 0.99 \\\\\nTrading activity & 9     & 0.19  & 0.67  & 0.47  & 0.79  & 0.91  & 0.63  & 0.35  & 0.42 \\\\\nLiquidity & 9     & 0.18  & 0.05  & 0.23  & 0.41  & 0.61  & 0.71  & 0.67  & 0.51 \\\\\nSpeculative demand & 9     & 0.31  & 0.15  & 0.03  & 0.02  & 0.04  & 0.05  & 0.08  & 0.01 \\\\\nVolatility and downside risk & 9     & 0.00  & 0.59  & 0.44  & 0.21  & 0.04  & 0.02  & 0.01  & 0.01 \\\\\nSocial media activity & 9     & 0.01  & 0.27  & 0.68  & 0.82  & 0.92  & 0.94  & 0.98  & 1.00 \\\\\nEquity market exposure & 8     & 0.80  & 0.83  & 0.88  & 1.00  & 0.21  & 0.04  & 0.00  & 0.00 \\\\\n\\midrule\n\\multicolumn{10}{c}{}\\\\\n\\bf Panel B: \\normalfont Weekly returns &  &  \\\\\n\\midrule\nGroups& \\multicolumn{1}{l}{L} &  \\multicolumn{8}{c}{Number of factors} \\\\\n\\cmidrule{3-10}\n&    &  1     & 2     & 3     & 4     & 5     & 6     & 7     & 8 \\\\\n\\midrule\nMarket, size and momentum & 5     & 0.13  & 0.02  & 0.00  & 0.01  & 0.03  & 0.01  & 0.00  & 0.00 \\\\\nReversal & 8     & 0.01  & 0.07  & 0.13  & 0.11  & 0.09  & 0.02  & 0.05  & 0.00 \\\\\nOn-chain activity & 8     & 0.12  & 0.82  & 0.68  & 0.08  & 0.17  & 0.24  & 0.07  & 0.00 \\\\\nTrading activity & 9     & 0.09  & 0.28  & 0.49  & 0.29  & 0.00  & 0.06  & 0.01  & 0.02 \\\\\nLiquidity & 9     & 0.25  & 0.38  & 0.64  & 0.68  & 0.42  & 0.25  & 0.49  & 0.65 \\\\\nSpeculative demand & 9     & 0.40  & 0.76  & 0.53  & 0.62  & 0.40  & 0.68  & 0.25  & 0.26 \\\\\nVolatility and downside risk & 9     & 0.05  & 0.76  & 0.76  & 0.79  & 0.95  & 0.90  & 0.84  & 0.79 \\\\\nSocial media activity & 9     & 0.04  & 0.46  & 0.62  & 0.88  & 0.85  & 0.54  & 0.65  & 0.49 \\\\\nEquity market exposure & 8     & 0.65  & 0.65  & 0.41  & 0.61  & 0.62  & 0.20  & 0.44  & 0.44 \\\\\n\\midrule\n\\end{tabular}",
+      "source_file": "Tables/Table5.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab6",
+      "label": "tab:Sliced_performance_daily",
+      "caption_short": "Asset Quality and Asset Pricing Performance",
+      "description": "This table reports $R^2_{tot}$ (Panel A) and $R^2_{pred}$ (Panel B) in percentages for models with IPCA, observable, or PCA factors by cryptocurrency groups sorted on selected characteristics. $\\Delta L(\\%)$ and $\\Delta H(\\%)$ show the percentage difference in $R^2$ between each alternative model and IPCA for low and high quartiles, respectively. Negative values indicate IPCA outperforms the alternative model. The models are estimated on daily returns.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrrrr}\n\\multicolumn{13}{l}{\\bf Panel A: \\normalfont $R_{tot}^2 (\\%)$}\\\\\n\\midrule \n& \\multicolumn{2}{c}{IPCA} &       & \\multicolumn{4}{c}{Instrumented observable factors}       &       & \\multicolumn{4}{c}{Static PCA}  \\\\\n\\cmidrule{2-3}\\cmidrule{5-8}\\cmidrule{10-13}\n  & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) \\\\\n  \\midrule \n{\\tt capm $\\beta$} & 12.11 & 16.61 &       & 5.46  & 10.77 & -55   & -35   &       & 14.68 & 18.58 & 21    & 12 \\\\\n{\\tt size} & 12.75 & 25.04 &       & 5.64  & 26.28 & -56   & 5     &       & 13.14 & 27.45 & 3     & 10 \\\\\n{\\tt new\\_add} & 13.18 & 22.30 &       & 6.98  & 20.34 & -47   & -9    &       & 13.27 & 23.51 & 1     & 5 \\\\\n{\\tt act\\_add} & 12.88 & 22.82 &       & 7.13  & 21.07 & -45   & -8    &       & 14.04 & 24.36 & 9     & 7 \\\\\n{\\tt bm}   & 18.37 & 13.72 &       & 16.78 & 6.48  & -9    & -53   &       & 21.78 & 14.06 & 19    & 2 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt \\$vol} & 12.30 & 26.28 &       & 4.86  & 25.74 & -61   & -2    &       & 13.62 & 28.37 & 11    & 8 \\\\\n{\\tt bidask} & 21.95 & 12.54 &       & 18.42 & 5.24  & -16   & -58   &       & 25.46 & 13.42 & 16    & 7 \\\\\n{\\tt ivol} & 36.94 & 12.02 &       & 37.93 & 4.40  & 3     & -63   &       & 41.33 & 14.17 & 12    & 18 \\\\\n{\\tt illiq} & 32.25 & 12.04 &       & 33.08 & 4.54  & 3     & -62   &       & 35.86 & 13.87 & 11    & 15 \\\\\n{\\tt VaR(5\\%)} & 11.78 & 24.39 &       & 4.65  & 23.25 & -61   & -5    &       & 14.20 & 29.44 & 21    & 21 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt max} $30$ & 29.43 & 11.57 &       & 29.30 & 5.03  & 0     & -57   &       & 32.57 & 13.66 & 11    & 18 \\\\\n{\\tt reddit\\_act} & 12.89 & 27.86 &       & 7.82  & 26.96 & -39   & -3    &       & 13.74 & 29.19 & 7     & 5 \\\\\n{\\tt reddit\\_post} & 12.38 & 26.89 &       & 7.25  & 26.77 & -41   & 0     &       & 11.88 & 29.23 & -4    & 9 \\\\\n{\\tt twitter\\_f} & 13.66 & 23.02 &       & 7.61  & 20.71 & -44   & -10   &       & 14.67 & 24.18 & 7     & 5 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt Equity capm $\\beta$} & 12.89 & 15.23 &       & 6.73  & 8.89  & -48   & -42   &       & 14.90 & 17.33 & 16    & 14 \\\\\n\\midrule\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n\\multicolumn{13}{l}{\\bf Panel B: \\normalfont $R_{pred}^2 (\\%)$}\\\\\n\\midrule \n& \\multicolumn{2}{c}{IPCA} &       & \\multicolumn{4}{c}{Instrumented observable factors}       &       & \\multicolumn{4}{c}{Static PCA}  \\\\\n\n\\cmidrule{2-3}\\cmidrule{5-8}\\cmidrule{10-13}\n  & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) \\\\\n  \\midrule \n{\\tt capm $\\beta$} & 0.38  & 0.31  &       & 0.10  & 0.08  & -73   & -73   &       & 0.16  & 0.15  & -58   & -51 \\\\\n{\\tt size}& 0.44  & -0.14 &       & 0.11  & 0.11  & -75   & -   &       & 0.14  & 0.05  & -68   & - \\\\\n{\\tt new\\_add} & 0.23  & 0.06  &       & 0.05  & 0.08  & -78   & 37    &       & 0.00  & 0.06  & -102  & -8 \\\\\n{\\tt act\\_add} & 0.30  & 0.03  &       & 0.08  & 0.08  & -74   & 151   &       & 0.08  & 0.07  & -73   & 121 \\\\\n{\\tt bm}    & 0.03  & 0.48  &       & 0.09  & 0.13  & 223   & -73   &       & 0.14  & 0.14  & 388   & -72 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt \\$vol} & 0.45  & -0.11 &       & 0.12  & 0.05  & -73   & 147   &       & 0.16  & 0.03  & -65   & - \\\\\n{\\tt bidask} & -0.18 & 0.58  &       & 0.04  & 0.12  & -   & -79   &       & 0.19  & 0.09  & -   & -84 \\\\\n{\\tt ivol}  & -0.66 & 0.42  &       & -0.03 & 0.10  & -    & -76   &       & -0.07 & 0.17  & -    & -59 \\\\\n{\\tt illiq} & -0.39 & 0.42  &       & 0.04  & 0.11  & -   & -75   &       & 0.03  & 0.17  & -   & -61 \\\\\n{\\tt VaR(5\\%)} & 0.43  & -0.24 &       & 0.11  & 0.03  & -75   & -   &       & 0.17  & 0.14  & -60   & - \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt max} $30$ & -0.15 & 0.40  &       & 0.04  & 0.09  & -   & -78   &       & -0.01 & 0.10  & -    & -75 \\\\\n{\\tt reddit\\_act} & 0.30  & -0.02 &       & 0.08  & 0.06  & -73   & -   &       & 0.13  & 0.01  & -57   & - \\\\\n{\\tt reddit\\_post} & 0.37  & -0.19 &       & 0.09  & 0.04  & -75   & -   &       & 0.09  & 0.04  & -76   & - \\\\\n{\\tt twitter\\_f} & 0.31  & 0.09  &       & 0.08  & 0.07  & -74   & -18   &       & 0.09  & 0.06  & -71   & -34 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt Equity capm $\\beta$} & 0.32  & 0.39  &       & 0.08  & 0.11  & -77   & -72   &       & 0.16  & 0.12  & -51   & -69 \\\\\n\\midrule \n\\end{tabular}",
+      "source_file": "Tables/Table6.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab7",
+      "label": "tab:delta",
+      "caption_short": "IPCA-Based Tests for Equity Factors",
+      "description": "The table reports p-values for the test $\\Gamma_\\delta = 0$ on instrumented loadings of equity factors when those are included with IPCA factors. We employ all characteristics as instruments for latent and observable factor loadings. The left panel reports the p-values of beta loadings when equity factors are included one at a time, whereas the right panel reports the p-values of beta loadings when all equity factors are included jointly in the estimation.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrrrrr}\n\\midrule \nIPCA& \\multicolumn{6}{c}{Individual Tests} & & \\multicolumn{6}{c}{Joint Tests}\\\\\n\\cmidrule{2-7}\\cmidrule{9-14}\n& MKT & SMB & HML & RMW & CMA & MOM & & MKT & SMB & HML & RMW & CMA & MOM \\\\\n\\midrule    \n$K=1$     & 0.79  & 0.98  & 0.60  & 0.66  & 0.97  & 0.49  & & 0.71  & 0.60  & 0.21  & 0.48  & 0.44  & 0.40  \\\\\n$K=2$     & 0.71  & 0.97  & 0.59  & 0.43  & 0.92  & 0.27  & & 0.68  & 0.92  & 0.47  & 0.34  & 0.74  & 0.08  \\\\\n$K=3$     & 0.70  & 0.90  & 0.42  & 0.15  & 0.94  & 0.15  & & 0.58  & 0.90  & 0.34  & 0.72  & 0.96  & 0.08  \\\\\n$K=4$     & 0.51  & 0.94  & 0.29  & 0.27  & 0.91  & 0.25  & & 0.68  & 0.98  & 0.24  & 0.39  & 0.71  & 0.17  \\\\\n$K=5$     & 0.65  & 0.85  & 0.16  & 0.26  & 0.88  & 0.17  & & 0.54  & 0.91  & 0.23  & 0.35  & 0.65  & 0.05  \\\\\n$K=6$     & 0.65  & 0.67  & 0.03  & 0.20  & 0.84  & 0.11  & & 0.71  & 0.78  & 0.03  & 0.31  & 0.56  & 0.09  \\\\\n$K=7$     & 0.57  & 0.57  & 0.06  & 0.22  & 0.73  & 0.07  & & 0.61  & 0.80  & 0.12  & 0.31  & 0.69  & 0.01  \\\\\n$K=8$     & 0.50  & 0.47  & 0.02  & 0.33  & 0.76  & 0.46  & & 0.70  & 0.77  & 0.06  & 0.34  & 0.67  & 0.06  \\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/Table7.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "tab8",
+      "label": "tab:spanning regressions",
+      "caption_short": "Factor-Spanning Regressions",
+      "description": "This table reports the results of factor-spanning regressions, in which we regress each latent factor from the eight-factor IPCA model on equity factors. We label with $^{***}, ^{**}, ^{*}$ those coefficients significant at the 1\\%, 5\\%, 10\\% confidence levels based on robust standard errors.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrrrrrrrrr}\n\\toprule\nIPCA factors       &       & \\multicolumn{1}{r}{F1} &       & \\multicolumn{1}{r}{F2} &       & \\multicolumn{1}{r}{F3} &       & \\multicolumn{1}{r}{F4} &       & \\multicolumn{1}{r}{F5} &       & \\multicolumn{1}{r}{F6} &       & \\multicolumn{1}{r}{F7} &       & \\multicolumn{1}{r}{F8} &  \\\\\n\\midrule \n& \\multicolumn{1}{l}{$\\alpha(\\%)$} & 0.10  &       & 1.60  & \\multicolumn{1}{l}{***} & 0.60  & \\multicolumn{1}{l}{***} & 2.50  & \\multicolumn{1}{l}{***} & 0.20  &       & 0.70  & \\multicolumn{1}{l}{***} & 0.20  &       & 1.40  & \\multicolumn{1}{l}{***} \\\\\n[1em]\n& \\multicolumn{1}{l}{MKT} & 0.30  &       & -0.30 &       & -0.40 & \\multicolumn{1}{l}{*} & 0.00  &       & 0.10  &       & -0.40 & \\multicolumn{1}{l}{***} & -1.20 & \\multicolumn{1}{l}{***} & 0.00  &  \\\\\n& \\multicolumn{1}{l}{SMB} & -0.50 &       & -0.50 &       & -0.70 & \\multicolumn{1}{l}{*} & 0.50  &       & 0.00  &       & 0.00  &       & -0.20 &       & 0.20  &  \\\\\nEquity      & \\multicolumn{1}{l}{HML} & 0.40  &       & 0.60  &       & 0.70  & \\multicolumn{1}{l}{**} & -0.30 &       & 0.10  &       & -0.30 &       & 0.40  & \\multicolumn{1}{l}{**} & 0.10  &  \\\\\n& \\multicolumn{1}{l}{RMW} & -0.20 &       & -0.90 &       & 0.10  &       & -0.10 &       & -0.10 &       & 0.20  &       & 0.40  &       & 0.00  &  \\\\\n& \\multicolumn{1}{l}{CMA} & -0.80 &       & -1.20 &       & -0.70 &       & 0.30  &       & -0.40 &       & 0.40  &       & -0.40 &       & -0.20 &  \\\\\n& \\multicolumn{1}{l}{MOM} & -0.20 &       & -0.40 &       & 0.10  &       & -0.20 &       & 0.00  &       & 0.00  &       & 0.00  &       & 0.00  &  \\\\\n[1em]\nAdj. $R^2$(\\%) &       & -0.20 &       & 0.00  &       & 0.40  &       & -0.10 &       & -0.30 &       & 0.70  &       & 9.10  &       & -0.20 &  \\\\\n\\bottomrule \n\\end{tabular}",
+      "source_file": "Tables/Table8.tex",
+      "in_appendix": false
+    },
+    {
+      "id": "apptab1",
+      "label": "table: sample statistics",
+      "caption_short": "Summary Statistics",
+      "description": "This table reports the number of coins, mean, median, and sum of market capitalization of cryptocurrencies by year. The last column displays the ratio of market capitalization in our sample to the total market capitalization of all available cryptocurrencies. The number of coins refers to the total number of cryptocurrencies traded within a year, whereas market capitalization statistics are end-of-year observations for all years except 2023, when the sample stops in May.",
+      "body_latex": "\\begin{tabular}{lrrrrrr}\n\\toprule\nYear  & \\multicolumn{1}{l}{\\# coins} &    \\multicolumn{4}{c}{Market capitalisation (\\$mil)}\\\\ \\cmidrule{3-6}  \n &  &   Mean & Median & Sum & Ratio \\\\\n\\midrule \n2016  & 11    & 80.42 & 1485.39 & 16640.36 & 93.06 \\\\\n2017  & 203   & 45.68 & 1781.26 & 478245.33 & 83.61 \\\\\n2018  & 553   & 22.78 & 749.58 & 111850.30 & 86.71 \\\\\n2019  & 578   & 7.13  & 435.46 & 168585.59 & 85.58 \\\\\n2020  & 527   & 4.37  & 756.66 & 674055.74 & 92.08 \\\\\n2021  & 355   & 13.77 & 5065.21 & 1543210.82 & 70.79 \\\\\n2022  & 289   & 13.76 & 4490.17 & 505259.46 & 63.32 \\\\\n2023  & 210   & 19.15 & 4595.67 & 864364.51 & 71.44 \\\\\nFull  & 630   & 10.73 & 1929.20 &       &       &  \\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/AppendixTable1.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab2",
+      "label": "tab: descriptive statistics of individual returns",
+      "caption_short": "Summary Statistics for Daily Returns of Individual Cryptocurrencies",
+      "description": "This table reports selected percentiles of summary statistics for daily returns of individual cryptocurrencies. For each asset, we first compute the mean, standard deviation, maximum, median, minimum, Sharpe ratio, skewness, and kurtosis statistics using the time series of daily returns. Then, we calculate the selected percentiles (0 (Min), 10, 25, 50, 75, 90, and 100 (Max)) across cryptocurrencies. The Sharpe ratio is converted to a weekly basis by multiplying by $\\sqrt{7}$, whereas other statistics are reported in daily terms.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrr}\n\\toprule \nPercentile & Mean (\\%)& Std (\\%) & Max (\\%) & Med (\\%) & Min (\\%) & SR & Skew & Kurt \\\\\n\\midrule\n0 (Min)   & -7.088 & 1.304 & 4.149 & -18.337 & -99.960 & -0.797 & -2.740 & 1.339 \\\\\n10  & -0.964 & 7.673 & 46.265 & -0.853 & -98.286 & -0.180 & -0.342 & 4.994 \\\\\n25  & -0.467 & 9.799 & 71.054 & -0.499 & -93.645 & -0.084 & 0.094 & 7.242 \\\\\n50  & -0.159 & 13.933 & 100.099 & -0.256 & -82.401 & -0.035 & 0.464 & 10.940 \\\\\n75  & 0.030  & 21.531 & 129.763 & -0.036 & -64.344 & 0.006 & 0.946 & 15.896 \\\\\n90  & 0.652 & 30.816 & 142.992 & 0.075 & -49.317 & 0.086 & 1.527 & 24.136 \\\\\n100 (Max)   & 12.65 & 98.432 & 149.967 & 9.241 & -2.279 & 0.647 & 5.293 & 102.940 \\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/AppendixTable2.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab3",
+      "label": "tab: descriptive statistics observable factors",
+      "caption_short": "Summary Statistics for Observable Factors",
+      "description": "This table reports summary statistics of the cryptocurrency market returns and observable risk factors. Each day, we sort cryptocurrencies into quintiles based on asset characteristics, one at a time, and form a long-short portfolio that buys (sells) cryptocurrencies in the top (bottom) quintile of each characteristic. The mean, standard deviation, maximum, median, and minimum, skewness, and kurtosis statistics are reported in daily terms, whereas the Sharpe ratio is converted to a weekly basis by multiplying by $\\sqrt{7}$.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrr}\n\\toprule \nFactor & Mean (\\%)& Std (\\%) & Max (\\%) & Med (\\%) & Min (\\%) & SR & Skew & Kurt \\\\\n\\midrule\nmkt$\\_$vw & 0.024 & 4.176 & 15.656 & 0.108 & -49.561 & 0.015 & -1.263 & 11.982 \\\\\n{\\tt size} & -0.464 & 3.754 & 17.851 & -0.277 & -41.341 & -0.327 & -1.068 & 9.657 \\\\\n{\\tt r14\\_1} & 0.249 & 6.547 & 55.947 & 0.213 & -57.393 & 0.101 & 0.024 & 13.639 \\\\\n{\\tt r21\\_1} & 0.226 & 6.246 & 54.415 & 0.182 & -58.335 & 0.096 & 0.068 & 16.842 \\\\\n{\\tt r30\\_1} & 0.057 & 5.779 & 53.523 & 0.131 & -55.103 & 0.026 & -0.926 & 19.068 \\\\\n\\midrule\n{\\tt r2\\_1} & -0.039 & 6.589 & 42.927 & -0.001 & -75.261 & -0.016 & -0.735 & 14.025 \\\\\n{\\tt r7\\_1} & 0.111 & 6.633 & 49.760 & 0.218 & -66.253 & 0.044 & -1.250 & 17.940 \\\\\n{\\tt r180\\_60} & 0.151 & 4.598 & 34.188 & 0.109 & -36.993 & 0.087 & -0.333 & 11.640 \\\\\n{\\tt rel\\_to\\_high} & 0.487 & 6.091 & 84.219 & 0.484 & -69.145 & 0.211 & 0.386 & 34.700 \\\\\n\\midrule\n{\\tt new\\_add} & -0.023 & 5.824 & 46.098 & 0.204 & -67.357 & -0.011 & -2.879 & 34.938 \\\\\n{\\tt act\\_add} & 0.100 & 5.753 & 27.229 & 0.343 & -72.864 & 0.046 & -3.047 & 31.018 \\\\\n{\\tt bm} & 0.182 & 4.596 & 43.931 & 0.023 & -45.532 & 0.105 & 0.639 & 19.568 \\\\\n\\midrule\n{\\tt \\$vol} & 0.678 & 8.328 & 83.276 & 0.372 & -61.172 & 0.215 & 0.485 & 15.877 \\\\\n{\\tt to} & 0.064 & 6.708 & 55.901 & 0.003 & -53.787 & 0.025 & 0.281 & 17.324 \\\\\n{\\tt std\\_vol} & -0.528 & 6.311 & 67.391 & -0.492 & -76.679 & -0.221 & -0.319 & 28.838 \\\\\n{\\tt cv\\_vol} & -0.417 & 7.245 & 77.258 & -0.464 & -79.522 & -0.152 & 1.066 & 26.609 \\\\\n\\midrule\n{\\tt bidask} & -0.688 & 8.972 & 79.577 & -0.967 & -84.696 & -0.203 & 0.748 & 17.056 \\\\\n{\\tt illiq} & -0.562 & 8.798 & 87.684 & -0.279 & -81.492 & -0.169 & -0.219 & 16.608 \\\\\n{\\tt vol\\_shock} & -0.040 & 4.505 & 44.971 & -0.154 & -44.167 & -0.023 & 0.295 & 14.868 \\\\\n{\\tt dto} & -0.089 & 4.405 & 43.994 & -0.138 & -43.891 & -0.054 & -0.161 & 18.572 \\\\\n\\midrule \n{\\tt co-skew} & -0.336 & 5.854 & 48.841 & -0.169 & -78.566 & -0.152 & -1.267 & 30.739 \\\\\n{\\tt max30} & -1.037 & 7.903 & 72.592 & -0.915 & -83.895 & -0.347 & -0.429 & 18.508 \\\\\n{\\tt max30 (4)} & -1.277 & 7.906 & 49.316 & -1.065 & -84.596 & -0.427 & -1.081 & 13.167 \\\\\n\\midrule\n{\\tt ivol} & -0.786 & 8.390 & 66.591 & -0.701 & -67.634 & -0.248 & -0.102 & 9.531 \\\\\n{\\tt rvol} & -1.280 & 9.199 & 60.680 & -1.199 & -87.319 & -0.368 & -0.232 & 10.205 \\\\\n{\\tt rskew} & -0.480 & 5.059 & 51.749 & -0.239 & -62.388 & -0.251 & -1.834 & 30.471 \\\\\n{\\tt Downside $\\beta$} & -0.191 & 6.233 & 70.560 & -0.200 & -54.768 & -0.081 & 0.751 & 21.253 \\\\\n{\\tt VaR(5\\%)} & 0.737 & 7.933 & 65.333 & 0.510 & -53.207 & 0.246 & 0.327 & 7.558 \\\\\n\\midrule\n{\\tt fb\\_likes} & 0.446 & 5.145 & 32.341 & 0.537 & -94.976 & 0.229 & -4.100 & 69.353 \\\\\n{\\tt reddit\\_act} & 0.334 & 6.094 & 58.886 & 0.250 & -90.218 & 0.145 & -1.330 & 38.021 \\\\\n{\\tt reddit\\_posts} & 0.251 & 5.956 & 37.871 & 0.302 & -80.465 & 0.111 & -2.595 & 38.696 \\\\\n{\\tt twitter\\_f} & 0.190 & 4.808 & 70.493 & 0.200 & -45.611 & 0.105 & 0.876 & 46.061 \\\\\n\\midrule\n{\\tt Equity capm $\\beta$} & 0.014 & 6.460 & 65.446 & -0.046 & -82.611 & 0.006 & -1.382 & 31.783 \\\\\n{\\tt Equity co-skew} & -0.066 & 4.841 & 51.767 & -0.093 & -53.488 & -0.036 & 0.453 & 18.188 \\\\\n{\\tt Equity downside $\\beta$} & 0.142 & 6.840 & 77.374 & 0.124 & -78.777 & 0.055 & 0.029 & 25.222 \\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/AppendixTable3.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab4",
+      "label": "tab:MP comparison",
+      "caption_short": "IPCA versus Instrumented Characteristic-Managed Portfolios",
+      "description": "This table compares the in-sample and out-of-sample $R^2_{tot}$ and $R^2_{pred}$ for models with IPCA factors, observable factors, or selected managed portfolios. We highlight with $^*$ those performance differentials which are statistically significant at a 1\\% threshold level.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrrr}\n\\toprule \n          &       & \\multicolumn{4}{c}{In-sample}     &       & \\multicolumn{4}{c}{Out-of-sample} \\\\\n          \\cmidrule{3-6}\\cmidrule{8-11}\n   Benchmarks       & K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n          \\midrule \n    {\\tt IPCA8} with $z = \\left\\{\\text{all characteristics}\\right\\}$ & 8     & 15.55 &       & 0.26  &       &       & 16.06 &       & 0.23  &  \\\\\n    {\\tt IPCA8} with $z = \\left\\{\\text{all characteristics}\\right\\} (\\Gamma_\\alpha = 0)$ & 8     & 15.49 & -0.43$^*$ & 0.21  & -18.11$^*$ &       & 15.54 & -3.22$^*$ & 0.20  & -15.06$^*$ \\\\\n          &       &       &       &       &       &       &       &       &       &  \\\\\nInstrumented observable & 11    & 10.56 & -32.10$^*$ & 0.27  & 2.59  &       &  9.88 & -38.49$^*$ & 0.24  &  2.10 \\\\      \nInstrumented observable \\& Gamma = 0 & 11    & 10.36 & -33.37$^*$ & 0.08  & -68.99$^*$ &       &  8.24 & -48.71$^*$ & 0.05  & -78.30$^*$ \\\\\n          &       &       &       &       &       &       &       &       &       &  \\\\\nInstrumented managed portfolios & 11    & 13.99 & -10.09$^*$ & 0.26  & 1.29  &       & 14.11 & -12.15$^*$ & 0.23  & -2.05 \\\\\nInstrumented managed portfolios \\& Gamma = 0 & 11    & 13.89 & -10.68$^*$ & 0.18  & -31.31$^*$ &       & 14.01 & -12.72$^*$ & 0.18  & -23.05$^*$ \\\\\n \\midrule \n\\end{tabular}",
+      "source_file": "Tables/AppendixTable4.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab5",
+      "label": "tab:Sliced_performance_weekly",
+      "caption_short": "Asset Quality and Pricing Performance for Weekly Returns",
+      "description": "This table reports $R^2_{tot}$ (Panel A) and $R^2_{pred}$ (Panel B) in percentages for models with IPCA, observable, or PCA factors by cryptocurrency groups sorted on selected characteristics. $\\Delta L(\\%)$ and $\\Delta H(\\%)$ show the percentage difference in $R^2$ between each alternative model and IPCA for low and high quartiles, respectively. Negative values indicate IPCA outperforms the alternative model. The models are estimated on weekly returns.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrrrr}\n\\multicolumn{13}{l}{\\bf Panel A: \\normalfont Total $R_{tot}^2(\\%)$}\\\\\n\\toprule \n& \\multicolumn{2}{c}{IPCA} &       & \\multicolumn{4}{c}{Instrumented observable factors}       &       & \\multicolumn{4}{c}{Static PCA}  \\\\\n\\cmidrule{2-3}\\cmidrule{5-8}\\cmidrule{10-13}\n  & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) \\\\\n  \\midrule \n{\\tt capm $\\beta$}  & 24.76 & 31.34 &       & 18.03 & 25.96 & -27   & -17   &       & 31.93 & 38.48 & 29    & 23 \\\\\n{\\tt size} & 24.71 & 41.03 &       & 17.30 & 40.38 & -30   & -2    &       & 32.88 & 46.84 & 33    & 14 \\\\\n{\\tt new\\_add} & 30.07 & 39.52 &       & 23.98 & 36.44 & -20   & -8    &       & 41.05 & 44.92 & 37    & 14 \\\\\n{\\tt act\\_add} & 26.07 & 39.90 &       & 20.24 & 36.86 & -22   & -8    &       & 37.02 & 45.47 & 42    & 14 \\\\\n{\\tt bm}    & 34.66 & 27.16 &       & 32.05 & 20.06 & -8    & -26   &       & 41.37 & 33.67 & 19    & 24 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt \\$vol} & 23.41 & 42.85 &       & 15.88 & 40.33 & -32   & -6    &       & 31.57 & 47.37 & 35    & 11 \\\\\n{\\tt bidask} & 38.55 & 24.29 &       & 34.64 & 16.19 & -10   & -33   &       & 44.76 & 31.42 & 16    & 29 \\\\\n{\\tt ivol}  & 49.61 & 22.04 &       & 46.92 & 14.26 & -5    & -35   &       & 54.42 & 30.24 & 10    & 37 \\\\\n{\\tt illiq} & 45.64 & 22.65 &       & 43.42 & 14.88 & -5    & -34   &       & 50.39 & 31.14 & 10    & 37 \\\\\n{\\tt VaR(5\\%)} & 21.91 & 41.93 &       & 14.41 & 39.28 & -34   & -6    &       & 29.70 & 48.06 & 36    & 15 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt max} $30$ & 44.47 & 23.85 &       & 41.02 & 15.99 & -8    & -33   &       & 49.89 & 32.34 & 12    & 36 \\\\\n{\\tt reddit\\_act} & 25.56 & 45.68 &       & 20.32 & 43.67 & -21   & -4    &       & 32.92 & 51.24 & 29    & 12 \\\\\n{\\tt reddit\\_post} & 25.97 & 42.71 &       & 20.62 & 41.12 & -21   & -4    &       & 34.15 & 48.16 & 31    & 13 \\\\\n{\\tt twitter\\_f} & 27.42 & 43.10 &       & 21.06 & 39.81 & -23   & -8    &       & 35.23 & 48.44 & 28    & 12 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt Equity capm $\\beta$} & 26.67 & 29.30 &       & 20.08 & 23.42 & -25   & -20   &       & 33.60 & 36.05 & 26    & 23 \\\\\n\\midrule\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n\\multicolumn{13}{l}{\\bf Panel B: \\normalfont Predictive $R_{pred}^2(\\%)$}\\\\\n\\midrule \n& \\multicolumn{2}{c}{IPCA} &       & \\multicolumn{4}{c}{Instrumented observable factors}       &       & \\multicolumn{4}{c}{Static PCA}  \\\\\n\n\\cmidrule{2-3}\\cmidrule{5-8}\\cmidrule{10-13}\n  & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) &       & \\multicolumn{1}{r}{Low} & \\multicolumn{1}{r}{High} & $\\Delta$L(\\%) & $\\Delta$H(\\%) \\\\\n  \\midrule \n{\\tt capm $\\beta$} & 2.89  & 1.79  &       & 0.87  & 0.69  & -70   & -62   &       & 0.63  & 0.50  & -78   & -72 \\\\\n{\\tt size} & 2.96  & -0.38 &       & 0.65  & 0.57  & -78   & 248   &       & 0.53  & 0.81  & -82   & 312 \\\\\n{\\tt new\\_add} & 2.37  & -0.15 &       & 0.72  & 0.49  & -70   & 424   &       & 1.03  & 0.63  & -57   & 517 \\\\\n{\\tt act\\_add} & 2.18  & -0.17 &       & 0.60  & 0.51  & -72   & 403   &       & 0.86  & 0.61  & -61   & 462 \\\\\n{\\tt bm}    & 0.65  & 2.61  &       & 0.71  & 0.60  & 10    & -77   &       & 0.85  & 0.53  & 32    & -80 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt \\$vol} & 3.52  & -0.35 &       & 0.80  & 0.58  & -77   & 266   &       & 0.57  & 0.71  & -84   & 302 \\\\\n{\\tt bidask} & -0.30 & 4.03  &       & 0.20  & 1.13  & 166   & -72   &       & 0.45  & 0.82  & 252   & -80 \\\\\n{\\tt ivol}  & -1.26 & 3.85  &       & -0.03 & 1.00  & 98    & -74   &       & 0.10  & 0.57  & 108   & -85 \\\\\n{\\tt illiq} & -1.06 & 3.71  &       & 0.34  & 0.89  & 132   & -76   &       & 0.57  & 0.64  & 154   & -83 \\\\\n{\\tt VaR(5\\%)} & 3.67  & -1.05 &       & 0.88  & 0.16  & -76   & 116   &       & 0.40  & 0.71  & -89   & 167 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt max} $30$ & -0.62 & 3.76  &       & 0.16  & 1.13  & 126   & -70   &       & 0.31  & 0.81  & 151   & -78 \\\\\n{\\tt reddit\\_act} & 2.24  & -0.53 &       & 0.77  & 0.22  & -65   & 142   &       & 0.93  & 0.26  & -58   & 149 \\\\\n{\\tt reddit\\_post} & 2.46  & -0.60 &       & 0.85  & 0.17  & -66   & 128   &       & 1.03  & 0.25  & -58   & 142 \\\\\n{\\tt twitter\\_f} & 2.36  & 0.00  &       & 0.79  & 0.44  & -66   & 10705 &       & 0.73  & 0.49  & -69   & 11709 \\\\\n          &       &       &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt Equity capm $\\beta$} & 2.25  & 2.38  &       & 0.77  & 0.76  & -66   & -68   &       & 0.58  & 0.52  & -74   & -78 \\\\\n\\midrule \n \\end{tabular}",
+      "source_file": "Tables/AppendixTable5.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab6",
+      "label": "tab:Model comparison scaled",
+      "caption_short": "Model Comparison With Volatility-Scaled Returns",
+      "description": "This table compares the in-sample $R^2_{tot}$ and $R^2_{pred}$ in percentages for models with IPCA, observable, and PCA factors. The models are estimated on daily or weekly returns scaled by the previous month’s realised volatility. For each model, it also shows the percentage change in $R^2_{tot}$ and $R^2_{pred}$ statistics relative to the unconstrained ($\\Gamma_\\alpha\\neq0$) eight-factor IPCA model with all characteristics used as instruments. We highlight with $^*$ those performance differentials that are statistically significant at a 1\\% threshold level.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrr}\n\\toprule \n    &       & \\multicolumn{4}{c}{Daily returns}     &       & \\multicolumn{4}{c}{Weekly returns} \\\\\n          \\cmidrule{3-6}\\cmidrule{8-11}\nMethod       & K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n \\midrule\n    {\\tt IPCA8} (all characteristics) & 8     & 29.89 &       & 0.20  &       &       & 44.92 &       & 1.14  &  \\\\\n     {\\tt IPCA8} (all characteristics) \\& $\\Gamma_\\alpha = 0$ & 8     & 29.87 & -0.05 & 0.19  & -5.44$^*$ &       & 44.85 & -0.16 & 1.13  & -0.73 \\\\\n          &       &       &       &       &       &       &       &       &       &  \\\\\n      Instrumented observable & 11    & 25.17 & -15.78$^*$ & 0.20  & 1.76  &       & 40.83 & -9.10$^*$ & 1.14  & 0.00 \\\\\n    Instrumented observable \\& $\\Gamma_\\alpha = 0$ & 11    & 25.03 & -16.27$^*$ & 0.07  & -67.24$^*$ &       & 40.34 & -10.20$^*$ & 0.75  & -34.34$^*$ \\\\\n          &       &       &       &       &       &       &       &       &       &  \\\\\n    {\\tt PCA8} \\& $\\Gamma_\\alpha = 0$ & 8     & 29.12 & -2.59$^*$ & 0.07  & -67.34$^*$ &       & 47.30 & 5.29$^*$  & 1.05  & -7.99$^*$ \\\\\n    \\midrule\n    \\end{tabular}",
+      "source_file": "Tables/AppendixTable6.tex",
+      "in_appendix": true
+    },
+    {
+      "id": "apptab7",
+      "label": "tab:Model comparison indiv ex",
+      "caption_short": "Model Comparison for Individual Exchanges",
+      "description": "This table compares the $R^2_{tot}$ and $R^2_{pred}$ in percentages for models with IPCA, observable, and PCA factors. The models are estimated on daily returns for cryptocurrency pairs sampled from four major exchanges: Binance, Coinbase, Kraken, and Bitfinex. We highlight with $^*$ those performance differentials that are statistically significant at a 1\\% threshold level based on the testing procedure highlighted in the main text.",
+      "body_latex": "\\begin{tabular}{lrrrrrrrrrr}\n\\toprule \n&       & \\multicolumn{4}{c}{Binance}     &       & \\multicolumn{4}{c}{Coinbase} \\\\\n      \\cmidrule{3-6}\\cmidrule{8-11}\n & K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n\\midrule\n{\\tt IPCA8} (all characteristics) & 8     & 64.51 &       & 0.20  &       &       & 63.88 &       & 0.58  &  \\\\\n {\\tt IPCA8} (all characteristics) \\& $\\Gamma_\\alpha = 0$ & 8     & 64.49 & -0.04 & 0.16  & -17.79 &       & 63.83 & -0.08 & 0.56  & -5.08 \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n  Instrumented observable & 11    & 43.78 & -32.13$^*$ & 0.23  & 15.35$^*$  &       & 43.75 & -31.51$^*$ & 0.68  & 15.88$^*$ \\\\\nInstrumented observable \\& $\\Gamma_\\alpha = 0$ & 11    & 43.58 & -32.44$^*$ & 0.05$^*$  & -74.83 &       & 43.39 & -32.08$^*$ & 0.31  & -47.51$^*$ \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt PCA8} \\& $\\Gamma_\\alpha = 0$ & 8     & 63.04 & -2.29 & 0.02  & -89.35$^*$ &       & 63.22 & -1.04 & 0.18  & -68.76$^*$ \\\\\n\n\\midrule\n\\multicolumn{11}{l}{}\\\\\n      &       & \\multicolumn{4}{c}{Kraken}     &       & \\multicolumn{4}{c}{Bitfinex} \\\\\n      \\cmidrule{3-6}\\cmidrule{8-11}\n& K& $R_{tot}^2$(\\%)& $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) &       & $R_{tot}^2$(\\%) & $\\Delta$(\\%) & $R_{pred}^2$(\\%) & $\\Delta$(\\%) \\\\\n\\midrule\n   {\\tt IPCA8} (all characteristics) & 8     & 69.27 &       & 0.13  &       &       & 50.45 &       & 0.13  &  \\\\\n {\\tt IPCA8} (all characteristics) \\& $\\Gamma_\\alpha = 0$ & 8     & 69.24 & -0.05 & 0.12  & -7.11 &       & 50.40 & -0.10 & 0.05  & -63.03$^*$ \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n  Instrumented observable & 11    & 48.13 & -30.51$^*$ & 0.17  & 33.52  &       & 20.86 & -58.66$^*$ & 0.15  & 17.71 \\\\\nInstrumented observable \\& $\\Gamma_\\alpha = 0$ & 11    & 48.09 & -30.57$^*$ & 0.14  & 10.53 &       & 20.74 & -58.89$^*$ & 0.04  & -72.04$^*$ \\\\\n      &       &       &       &       &       &       &       &       &       &  \\\\\n{\\tt PCA8} \\& $\\Gamma_\\alpha = 0$ & 8     & 70.86 & 2.30 & 0.12  & -5.49 &       & 51.86 & 2.79 & 0.01  & -95.07$^*$ \\\\\n\\bottomrule\n\\end{tabular}",
+      "source_file": "Tables/AppendixTable7.tex",
+      "in_appendix": true
+    }
+  ],
+  "characteristic_groups": {
+    "M1": "Market, size, momentum",
+    "M2": "Reversal",
+    "M3": "On-chain activity",
+    "M4": "Trading activity",
+    "M5": "Liquidity",
+    "M6": "Speculative demand",
+    "M7": "Volatility and downside risk",
+    "M8": "Social media activity",
+    "M9": "Equity market exposure"
+  }
+}

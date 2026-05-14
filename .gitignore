@@ -1,0 +1,16 @@
+# Source materials kept private — the public repo only ships what the widget
+# loads at runtime plus the build scripts and reader-eval questions.
+manuscript/
+replication/
+
+# Working notes for Claude Code sessions; not for public consumption.
+CLAUDE.md
+
+# OS / editor / Python caches
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local server output
+*.log

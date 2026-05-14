@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mispricing and Risk Compensation in Cryptocurrency Returns — Reader's companion</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/marked@14.1.2/marked.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<style>
+  :root {
+    --accent: #1f3a5f;
+    --accent-dark: #142440;
+    --dark: #2b2b2b;
+    --muted: #6b6b6b;
+    --light: #f5f6f8;
+    --border: #e4e7ec;
+    --highlight: #c47b3a;
+    --user-bg: #1f3a5f;
+    --user-fg: #ffffff;
+    --bot-bg: #f3f4f6;
+    --bot-fg: #1f2937;
+    --danger: #b42318;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--dark);
+    background: #fafbfc;
+  }
+  button { font-family: inherit; }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 0 1px var(--border);
+  }
+  header {
+    padding: 14px 22px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  header .title h1 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  header .title p {
+    margin: 3px 0 0 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  header .actions { display: flex; gap: 8px; }
+  header .actions button {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--dark);
+  }
+  header .actions button:hover { background: var(--light); }
+
+  main { flex: 1; display: flex; overflow: hidden; min-height: 0; }
+
+  #sidebar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 16px 18px;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+  #sidebar h3 {
+    margin: 0 0 8px 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  #sidebar .group { margin-bottom: 22px; }
+  #sidebar .meta {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  #sidebar .meta a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  #sidebar .meta a:hover { text-decoration: underline; }
+  #sidebar #toc { font-size: 12.5px; line-height: 1.4; }
+  #sidebar .toc-section-label {
+    margin: 12px 0 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  #sidebar .toc-section-label:first-child { margin-top: 0; }
+  #sidebar .toc-item {
+    padding: 2px 0;
+    color: var(--dark);
+  }
+  #sidebar .toc-item.depth-1 { padding-left: 14px; color: #3f4a5c; }
+  #sidebar .toc-item.depth-2 { padding-left: 26px; color: var(--muted); font-size: 12px; }
+  #sidebar .toc-item .num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  /* Inline figure thumbnails attached to a user message. */
+  .msg .thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .msg.user .thumbs { justify-content: flex-end; }
+  .msg .thumb {
+    max-width: 130px;
+    max-height: 130px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: white;
+    cursor: zoom-in;
+    object-fit: contain;
+  }
+  .msg .thumb:hover { border-color: var(--accent); }
+  #sidebar .status {
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  #sidebar .status:empty { display: none; }
+
+  #chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    min-width: 0;
+    min-height: 0;
+  }
+  #messages {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 24px 28px;
+  }
+  .msg {
+    margin-bottom: 18px;
+    max-width: 88%;
+    clear: both;
+  }
+  .msg.user { margin-left: auto; text-align: right; }
+  .msg.assistant { margin-right: auto; }
+  .msg .bubble {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 14px;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.55;
+    font-size: 14.5px;
+  }
+  .msg.user .bubble {
+    background: var(--user-bg);
+    color: var(--user-fg);
+    border-bottom-right-radius: 4px;
+  }
+  .msg.assistant .bubble {
+    background: var(--bot-bg);
+    color: var(--bot-fg);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.assistant .bubble.markdown { white-space: normal; }
+  .msg.assistant .bubble.markdown > *:first-child { margin-top: 0; }
+  .msg.assistant .bubble.markdown > *:last-child { margin-bottom: 0; }
+  .msg.assistant .bubble.markdown h1,
+  .msg.assistant .bubble.markdown h2,
+  .msg.assistant .bubble.markdown h3,
+  .msg.assistant .bubble.markdown h4 {
+    margin: 14px 0 6px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+  .msg.assistant .bubble.markdown h1 { font-size: 1.25em; }
+  .msg.assistant .bubble.markdown h2 { font-size: 1.15em; }
+  .msg.assistant .bubble.markdown h3 { font-size: 1.05em; }
+  .msg.assistant .bubble.markdown h4 { font-size: 1em; }
+  .msg.assistant .bubble.markdown p { margin: 8px 0; }
+  .msg.assistant .bubble.markdown ul,
+  .msg.assistant .bubble.markdown ol { margin: 8px 0; padding-left: 22px; }
+  .msg.assistant .bubble.markdown li { margin: 3px 0; }
+  .msg.assistant .bubble.markdown li > p { margin: 2px 0; }
+  .msg.assistant .bubble.markdown hr {
+    border: none;
+    border-top: 1px solid #d8dce3;
+    margin: 14px 0;
+  }
+  .msg.assistant .bubble.markdown strong { font-weight: 600; }
+  .msg.assistant .bubble.markdown em { font-style: italic; }
+  .msg.assistant .bubble.markdown code {
+    background: #e6e8ed;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+  .msg.assistant .bubble.markdown pre {
+    background: #e6e8ed;
+    padding: 10px 12px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+  .msg.assistant .bubble.markdown pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.9em;
+  }
+  .msg.assistant .bubble.markdown table {
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 0.95em;
+  }
+  .msg.assistant .bubble.markdown th,
+  .msg.assistant .bubble.markdown td {
+    border: 1px solid #d8dce3;
+    padding: 5px 10px;
+    text-align: left;
+  }
+  .msg.assistant .bubble.markdown th {
+    background: #eef1f5;
+    font-weight: 600;
+  }
+  .msg.assistant .bubble.markdown blockquote {
+    margin: 10px 0;
+    padding: 4px 0 4px 12px;
+    border-left: 3px solid #c9cfd8;
+    color: #4a5160;
+  }
+  .msg.assistant .bubble.markdown a {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .msg.assistant .bubble.markdown .katex-display {
+    margin: 10px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .msg .attached {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .msg.system {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    max-width: 100%;
+    font-style: italic;
+  }
+  .msg.system.error { color: var(--danger); }
+
+  #input-form {
+    padding: 14px 22px 8px 22px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    background: #fafbfc;
+    flex-shrink: 0;
+  }
+  #disclaimer {
+    padding: 2px 22px 10px;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    background: #fafbfc;
+    flex-shrink: 0;
+  }
+  #input {
+    flex: 1;
+    min-height: 42px;
+    max-height: 160px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 14.5px;
+    resize: none;
+    outline: none;
+    background: white;
+    line-height: 1.4;
+  }
+  #input:focus { border-color: var(--accent); }
+  #send-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    min-width: 80px;
+  }
+  #send-btn:hover:not(:disabled) { background: var(--accent-dark); }
+  #send-btn:disabled {
+    background: #9aa4b2;
+    cursor: not-allowed;
+  }
+
+  #key-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 16px;
+  }
+  #key-modal.hidden { display: none; }
+  #key-modal .panel {
+    background: white;
+    border-radius: 14px;
+    padding: 26px 26px 22px 26px;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  }
+  #key-modal h2 {
+    margin: 0 0 8px 0;
+    font-size: 19px;
+    color: var(--accent);
+  }
+  #key-modal p {
+    margin: 0 0 18px 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  #key-modal label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  #key-modal label span {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--dark);
+  }
+  #key-modal input, #key-modal select {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    background: white;
+  }
+  #key-modal input:focus, #key-modal select:focus { border-color: var(--accent); }
+  #key-modal .buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  #key-modal .buttons button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    background: white;
+    color: var(--dark);
+  }
+  #key-modal .buttons button.primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+  #key-modal .buttons button.primary:hover { background: var(--accent-dark); }
+
+  @media (max-width: 720px) {
+    main { flex-direction: column; }
+    #sidebar {
+      width: 100%;
+      max-height: 200px;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    #app { max-width: none; }
+    header h1 { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header>
+    <div class="title">
+      <h1>Mispricing and Risk Compensation in Cryptocurrency Returns</h1>
+      <p>Babiak &amp; Bianchi (JFQA, 2026) · BYOK reader's companion</p>
+    </div>
+    <div class="actions">
+      <button id="settings-btn" type="button">Settings</button>
+      <button id="clear-btn" type="button">Clear chat</button>
+    </div>
+  </header>
+
+  <main>
+    <aside id="sidebar">
+      <div class="group">
+        <h3>The paper</h3>
+        <div class="meta" id="paper-meta">Loading…</div>
+      </div>
+      <div class="group">
+        <h3>Contents</h3>
+        <div id="toc"></div>
+      </div>
+      <div class="status" id="status"></div>
+    </aside>
+
+    <section id="chat">
+      <div id="messages"></div>
+      <form id="input-form">
+        <textarea
+          id="input"
+          rows="1"
+          placeholder="Ask about the paper… (Enter to send, Shift+Enter for newline)"
+          autocomplete="off"
+        ></textarea>
+        <button type="submit" id="send-btn" disabled>Send</button>
+      </form>
+      <div id="disclaimer">AI-generated answers — verify against the paper. Not investment advice.</div>
+    </section>
+  </main>
+</div>
+
+<div id="key-modal" class="hidden">
+  <div class="panel">
+    <h2>API key required</h2>
+    <p>
+      This widget calls the Anthropic or OpenAI API directly from your browser.
+      Your key is stored in <strong>sessionStorage only</strong> — it is wiped
+      when you close the tab and is never sent anywhere except the API provider
+      you choose.
+    </p>
+    <label>
+      <span>Provider</span>
+      <select id="provider-select">
+        <option value="anthropic">Anthropic (Claude)</option>
+        <option value="openai">OpenAI (GPT)</option>
+      </select>
+    </label>
+    <label>
+      <span>Model</span>
+      <input type="text" id="model-input" placeholder="claude-haiku-4-5-20251001">
+    </label>
+    <label>
+      <span>API key</span>
+      <input type="password" id="apikey-input" placeholder="sk-ant-... or sk-...">
+    </label>
+    <div class="buttons">
+      <button type="button" id="cancel-key-btn">Cancel</button>
+      <button type="button" id="clear-key-btn">Clear saved key</button>
+      <button type="button" class="primary" id="save-key-btn">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ============================================================
+  // Config
+  // ============================================================
+
+  const MAX_HISTORY_TURNS = 8;             // keep last N user/assistant pairs
+  const MAX_PANELS_PER_FIGURE = 6;         // cap image attachments per turn
+  const BUNDLE_BASE = "../bundle/";
+
+  const PROVIDER_DEFAULTS = {
+    anthropic: {
+      // Haiku at the default: Tier 1 TPM caps it higher than Sonnet, and the
+      // ~100k-token paper bundle won't fit Sonnet's 30k/min on a free key.
+      // Bump to claude-sonnet-4-6 once you're on Tier 2+ for sharper answers.
+      model: "claude-haiku-4-5-20251001",
+      endpoint: "https://api.anthropic.com/v1/messages",
+    },
+    openai: {
+      model: "gpt-4o",
+      endpoint: "https://api.openai.com/v1/chat/completions",
+    },
+  };
+
+  const STORAGE = {
+    provider: "jfqa1.provider",
+    model:    "jfqa1.model",
+    apikey:   "jfqa1.apikey",
+  };
+
+  // sessionStorage can throw SecurityError in sandboxed iframes; fall back
+  // silently to an in-memory object so the UI keeps working.
+  const memStore = Object.create(null);
+  let storageBackend = "session";
+  const safeStorage = {
+    getItem(key) {
+      try { return sessionStorage.getItem(key); }
+      catch (_) { storageBackend = "memory"; return key in memStore ? memStore[key] : null; }
+    },
+    setItem(key, value) {
+      try { sessionStorage.setItem(key, value); }
+      catch (_) { storageBackend = "memory"; memStore[key] = value; }
+    },
+    removeItem(key) {
+      try { sessionStorage.removeItem(key); }
+      catch (_) { storageBackend = "memory"; delete memStore[key]; }
+    },
+  };
+
+  // ============================================================
+  // State
+  // ============================================================
+
+  // The bundle is the full reading payload: paper text + structured metadata
+  // + cited references. We send the whole thing as the cached system prompt
+  // every turn (Anthropic prompt caching makes the per-turn cost reasonable).
+  const bundle = {
+    paper: "",        // string — paper.md
+    metadata: null,   // object — metadata.json
+    refs: null,       // array  — references.json
+    replication: "",  // string — replication.md (curated source files)
+    loaded: false,
+  };
+
+  const history = []; // [{ role: "user"|"assistant", content: string }]
+
+  // ============================================================
+  // DOM helpers
+  // ============================================================
+
+  const $ = (sel) => document.querySelector(sel);
+  const el = (tag, attrs, ...children) => {
+    const node = document.createElement(tag);
+    if (attrs) {
+      for (const k in attrs) {
+        if (k === "class") node.className = attrs[k];
+        else if (k === "text") node.textContent = attrs[k];
+        else if (k.startsWith("on") && typeof attrs[k] === "function") {
+          node.addEventListener(k.slice(2), attrs[k]);
+        } else {
+          node.setAttribute(k, attrs[k]);
+        }
+      }
+    }
+    for (const c of children) {
+      if (c == null) continue;
+      if (typeof c === "string") node.appendChild(document.createTextNode(c));
+      else node.appendChild(c);
+    }
+    return node;
+  };
+
+  // ============================================================
+  // Bundle loading
+  // ============================================================
+
+  async function loadBundle() {
+    try {
+      // `cache: "no-cache"` matters: when the bundle is rebuilt mid-session,
+      // browsers happily serve a stale metadata.json (still pointing at the
+      // manuscript-form file names like Figure2a_alpha_…png) and the figure
+      // router 404s.
+      const opts = { cache: "no-cache" };
+      const [paper, metadata, refs, replication] = await Promise.all([
+        fetch(BUNDLE_BASE + "paper.md", opts).then(r => {
+          if (!r.ok) throw new Error("paper.md HTTP " + r.status);
+          return r.text();
+        }),
+        fetch(BUNDLE_BASE + "metadata.json", opts).then(r => {
+          if (!r.ok) throw new Error("metadata.json HTTP " + r.status);
+          return r.json();
+        }),
+        fetch(BUNDLE_BASE + "references.json", opts).then(r => {
+          if (!r.ok) throw new Error("references.json HTTP " + r.status);
+          return r.json();
+        }),
+        // replication.md is optional — old bundles without it should still work.
+        fetch(BUNDLE_BASE + "replication.md", opts).then(r => r.ok ? r.text() : ""),
+      ]);
+      bundle.paper = paper;
+      bundle.metadata = metadata;
+      bundle.refs = refs;
+      bundle.replication = replication;
+      bundle.loaded = true;
+      renderPaperMeta();
+      renderTOC();
+      updateSendButton();
+    } catch (err) {
+      addSystemMessage("Couldn't load the paper bundle: " + (err && err.message || err), true);
+    }
+  }
+
+  function renderPaperMeta() {
+    const m = bundle.metadata;
+    const authors = (m.authors || []).map(a => a.name).join(" and ");
+    const doi = m.doi ? `<a href="https://doi.org/${m.doi}" target="_blank" rel="noopener">${m.doi}</a>` : "";
+    $("#paper-meta").innerHTML =
+      `<div><strong>${m.title}</strong></div>` +
+      `<div style="margin-top:4px">${authors}</div>` +
+      `<div style="margin-top:4px">${m.journal}, ${m.year_issue || m.year_online}</div>` +
+      (doi ? `<div style="margin-top:4px">DOI: ${doi}</div>` : "");
+  }
+
+  // Build a table of contents from metadata.sections. Numbering matches the
+  // tex_to_md.py scheme: main top-level → Roman; main subsections → A, B, C;
+  // appendix top-level → A, B, C, D; appendix subsections → 1, 2, 3 (so the
+  // common "A.A" collision doesn't happen).
+  function renderTOC() {
+    const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+    const ALPHA = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    const box = $("#toc");
+    box.innerHTML = "";
+
+    const sections = bundle.metadata.sections || [];
+    let mainTop = -1, mainSub = 0;
+    let appTop = -1, appSub = 0;
+    let lastBucket = null;
+
+    function addLabel(text) {
+      box.appendChild(el("div", { class: "toc-section-label" }, text));
+    }
+    function addItem(num, title, depth) {
+      const node = el("div", { class: "toc-item depth-" + depth });
+      if (num) node.appendChild(el("span", { class: "num" }, num));
+      node.appendChild(document.createTextNode(title));
+      box.appendChild(node);
+    }
+
+    for (const s of sections) {
+      const bucket = s.in_appendix ? "app" : "main";
+      if (bucket !== lastBucket) {
+        addLabel(bucket === "main" ? "Main paper" : "Internet Appendix");
+        lastBucket = bucket;
+      }
+      if (bucket === "main") {
+        if (s.level === 1) {
+          mainTop++;
+          mainSub = 0;
+          addItem(ROMAN[mainTop] + ".", s.title, 0);
+        } else if (s.level === 2) {
+          addItem(ALPHA[mainSub] + ".", s.title, 1);
+          mainSub++;
+        } else {
+          addItem("", s.title, 2);
+        }
+      } else {
+        if (s.level === 1) {
+          appTop++;
+          appSub = 0;
+          addItem(ALPHA[appTop] + ".", s.title, 0);
+        } else if (s.level === 2) {
+          appSub++;
+          addItem(appSub + ".", s.title, 1);
+        } else {
+          addItem("", s.title, 2);
+        }
+      }
+    }
+  }
+
+  function fancyLabel(id) {
+    // "fig5" → "Fig 5", "appfig1" → "Fig A1", "tab3" → "Tab 3", "apptab2" → "Tab A2"
+    const m = id.match(/^(app)?(fig|tab)(\d+)$/);
+    if (!m) return id;
+    const prefix = m[2] === "fig" ? "Fig" : "Tab";
+    const app = m[1] ? "A" : "";
+    return `${prefix} ${app}${m[3]}`;
+  }
+
+  // ============================================================
+  // Figure-attachment router
+  // ============================================================
+
+  // Detect explicit figure mentions in the user's message. Returns a list of
+  // `{ id, panel }` entries — panel is null for "Figure 1" (attach all
+  // panels) and a letter for "Figure 1a" (attach that panel only).
+  //
+  // Order in the regex list matters: longer / more specific patterns first
+  // so they match before generic ones.
+  function detectFigures(text) {
+    const lower = text.toLowerCase();
+    const out = [];
+    const seen = new Set();
+
+    function push(id, panel) {
+      const k = id + ":" + (panel || "");
+      if (!seen.has(k)) { seen.add(k); out.push({ id, panel }); }
+    }
+
+    // "Appendix Figure 6c", "Appendix Fig 6 panel c", "Fig A6c"
+    let re = /(?:appendix\s+fig(?:ure)?|fig(?:ure)?\s*a)\s*(\d+)\s*(?:panel\s+)?([a-f])?\b/gi;
+    let m;
+    while ((m = re.exec(lower)) !== null) {
+      push(`appfig${parseInt(m[1], 10)}`, m[2] || null);
+    }
+    // Main "Figure 5", "Fig 1a", "Figure 3 panel B"
+    re = /\bfig(?:ure)?\s*(\d+)\s*(?:panel\s+)?([a-f])?\b/gi;
+    while ((m = re.exec(lower)) !== null) {
+      // Skip ones already captured by the appendix pattern (which consumed
+      // the same digits inside "Figure A...").
+      // The appendix matcher captures "fig a5" but the main matcher would
+      // try to match "fig" alone — that won't match (the regex requires
+      // a digit). The shared problem is only when the user writes
+      // "Figure 5" near the word "appendix" without "A". Cheap fix:
+      // duplicates are deduped by `seen`.
+      push(`fig${parseInt(m[1], 10)}`, m[2] || null);
+    }
+    return out;
+  }
+
+  // Resolve a detected mention to the actual filename(s) in bundle/figures/.
+  function panelsFor(detection) {
+    const meta = bundle.metadata && bundle.metadata.figures.find(f => f.id === detection.id);
+    if (!meta) return [];
+    const all = meta.files || [];
+    if (detection.panel) {
+      // Find the panel whose original sub-caption letter matches.
+      // In the bundled name scheme the i-th panel becomes <id>_<letter>.png
+      // (or <id>.png if there's only one), so map letter → index.
+      const idx = detection.panel.charCodeAt(0) - "a".charCodeAt(0);
+      if (idx >= 0 && idx < all.length) return [all[idx]];
+      return [];
+    }
+    return all.slice(0, MAX_PANELS_PER_FIGURE);
+  }
+
+  // Fetch a PNG file and return its raw base64 body (no data: prefix).
+  async function fetchPngBase64(url) {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("HTTP " + res.status + " for " + url);
+    const blob = await res.blob();
+    return await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result || "";
+        const comma = result.indexOf(",");
+        resolve(comma < 0 ? result : result.slice(comma + 1));
+      };
+      reader.onerror = () => reject(reader.error || new Error("FileReader failed"));
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  // ============================================================
+  // System-prompt construction
+  // ============================================================
+
+  const INSTRUCTIONS = [
+    "You are a reader's companion for the paper:",
+    "  \"Mispricing and Risk Compensation in Cryptocurrency Returns\"",
+    "  by Mykola Babiak and Daniele Bianchi, Journal of Financial and Quantitative Analysis (forthcoming, 2026).",
+    "",
+    "Audience: practitioners with crypto exposure, financial journalists, MSc finance students, and PhD finance students. Quantitatively literate but not necessarily academic researchers.",
+    "",
+    "How to answer:",
+    "- Intuition first, formalism only when the user signals they want it (PhD-level phrasing, references to specific equations, asks for the technical detail).",
+    "- Calibrate the depth to the user's apparent expertise. A journalist gets the headline finding; a PhD student gets the IPCA mechanics.",
+    "- Be direct. State the answer first, then the supporting evidence from the paper. Avoid hedging phrases like \"the paper suggests\", \"I think\", \"it might be\" unless the paper itself genuinely hedges.",
+    "- Cite specific numbers, tables, and figures from the paper whenever they back the claim. Refer to tables and figures by their displayed label (e.g. \"Table 2\", \"Figure 5\", \"Table A1\", \"Figure A6\").",
+    "- Render math in LaTeX between $...$ (inline) or $$...$$ (display) — the widget renders KaTeX.",
+    "- Use Markdown headings, lists, and tables when they aid clarity.",
+    "- Do NOT invent results. If the paper does not answer the user's question, say so and, where possible, point to a related result.",
+    "- Do NOT prefix replies with meta-disclaimers (\"Based on the paper...\", \"From what I can see...\"). Just answer.",
+    "",
+    "Figure handling:",
+    "- When the user names a figure (e.g. \"Figure 5\", \"Appendix Figure 6c\"), the widget attaches the figure image(s) to the user's message. Describe what's visible and tie it back to the paper's claims.",
+    "- When the user asks about a figure that wasn't attached, you can still answer from the figure's caption/description in the paper text — but say you don't have the image in front of you.",
+    "",
+    "Replication code:",
+    "- A curated subset of the replication package (the data-pipeline scripts and the IPCA estimator library) is included after the references. When the reader asks \"how is X computed?\" or \"how does the estimator actually work?\", quote the relevant function from those files instead of paraphrasing — the actual formula matters.",
+    "- Per-table and per-figure scripts (CODE/Figure_*.py, CODE/Table_*.py) are NOT bundled. If the reader needs one of those, point them at the README mapping and the Harvard Dataverse package.",
+    "",
+    "What follows: the complete paper text, the structured metadata index, the cited references, and the curated replication code. Use all four.",
+  ].join("\n");
+
+  function buildSystemText() {
+    const m = bundle.metadata;
+    const sections = [
+      INSTRUCTIONS,
+      "\n\n========== PAPER ==========\n",
+      bundle.paper,
+      "\n\n========== METADATA INDEX ==========\n",
+      JSON.stringify({
+        title: m.title,
+        authors: m.authors,
+        journal: m.journal,
+        year: m.year_issue,
+        doi: m.doi,
+        dataverse: m.dataverse_doi,
+        sections: m.sections,
+        figures: m.figures.map(f => ({
+          id: f.id,
+          label: f.label,
+          caption: f.caption_short,
+          panels: (f.files || []).length,
+          in_appendix: f.in_appendix,
+        })),
+        tables: m.tables.map(t => ({
+          id: t.id,
+          label: t.label,
+          caption: t.caption_short,
+          in_appendix: t.in_appendix,
+        })),
+        characteristic_groups: m.characteristic_groups,
+      }, null, 2),
+      "\n\n========== CITED REFERENCES ==========\n",
+      JSON.stringify(bundle.refs, null, 2),
+    ];
+    if (bundle.replication) {
+      sections.push("\n\n========== REPLICATION CODE (curated) ==========\n");
+      sections.push(bundle.replication);
+    }
+    return sections.join("\n");
+  }
+
+  // ============================================================
+  // API key / settings
+  // ============================================================
+
+  function getConfig() {
+    const provider = safeStorage.getItem(STORAGE.provider) || "anthropic";
+    const model = safeStorage.getItem(STORAGE.model) || PROVIDER_DEFAULTS[provider].model;
+    const apikey = safeStorage.getItem(STORAGE.apikey) || "";
+    return { provider, model, apikey };
+  }
+  function hasApiKey() { return !!safeStorage.getItem(STORAGE.apikey); }
+  function saveConfig(provider, model, apikey) {
+    safeStorage.setItem(STORAGE.provider, provider);
+    safeStorage.setItem(STORAGE.model, model);
+    safeStorage.setItem(STORAGE.apikey, apikey);
+  }
+  function clearConfig() {
+    safeStorage.removeItem(STORAGE.provider);
+    safeStorage.removeItem(STORAGE.model);
+    safeStorage.removeItem(STORAGE.apikey);
+  }
+  function openKeyModal() {
+    const cfg = getConfig();
+    $("#provider-select").value = cfg.provider;
+    $("#model-input").value = cfg.model;
+    $("#apikey-input").value = cfg.apikey;
+    $("#key-modal").classList.remove("hidden");
+    setTimeout(() => $("#apikey-input").focus(), 50);
+  }
+  function closeKeyModal() { $("#key-modal").classList.add("hidden"); }
+  function updateSendButton() {
+    $("#send-btn").disabled = !(hasApiKey() && bundle.loaded);
+  }
+
+  // ============================================================
+  // Message rendering (Markdown + KaTeX)
+  // ============================================================
+
+  // Same renderer as ECOM215: mask math, run marked.js, re-insert KaTeX
+  // HTML. The escaped-dollar guard handles the case where Claude writes
+  // a literal `$5,656` next to inline math.
+  function renderAssistantHTML(text) {
+    if (!window.marked || !window.katex) return null;
+
+    const DLR = "DLR";
+    const DLR_RE = /DLR/g;
+    let src = text.replace(/\\\$/g, DLR);
+
+    const blocks = [];
+    const placeholder = (i) => "MATH" + i + "";
+    const pushMath = (body, display) => {
+      blocks.push({ math: body.replace(DLR_RE, () => "\\$"), display });
+      return placeholder(blocks.length - 1);
+    };
+    src = src.replace(/\$\$([\s\S]+?)\$\$/g, (_m, body) => pushMath(body, true));
+    src = src.replace(/\\\[([\s\S]+?)\\\]/g, (_m, body) => pushMath(body, true));
+    src = src.replace(/\\\(([\s\S]+?)\\\)/g, (_m, body) => pushMath(body, false));
+    src = src.replace(
+      /\$([^\s$][^$\n]*?)\$(?=[\s.,;:!?)\]}'’"\-]|$)/g,
+      (_m, body) => pushMath(body, false),
+    );
+    src = src.replace(DLR_RE, () => "$");
+
+    let html;
+    try { html = window.marked.parse(src); }
+    catch (_) { return null; }
+
+    html = html.replace(/MATH(\d+)/g, (_m, idx) => {
+      const block = blocks[parseInt(idx, 10)];
+      if (!block) return "";
+      try {
+        return window.katex.renderToString(block.math, {
+          throwOnError: false,
+          displayMode: block.display,
+          output: "html",
+        });
+      } catch (_) {
+        const esc = (block.math || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+        return block.display ? "<pre>" + esc + "</pre>" : "<code>" + esc + "</code>";
+      }
+    });
+    return html;
+  }
+
+  function addMessage(role, text, attachedNote, attachedFiles) {
+    const container = $("#messages");
+    const msg = el("div", { class: "msg " + role });
+    const bubble = el("div", { class: "bubble" });
+    if (role === "assistant") {
+      const html = renderAssistantHTML(text);
+      if (html != null) { bubble.classList.add("markdown"); bubble.innerHTML = html; }
+      else { bubble.textContent = text; }
+    } else {
+      bubble.textContent = text;
+    }
+    msg.appendChild(bubble);
+    if (attachedFiles && attachedFiles.length > 0) {
+      const thumbs = el("div", { class: "thumbs" });
+      for (const a of attachedFiles) {
+        const src = BUNDLE_BASE + "figures/" + a.file;
+        const img = el("img", {
+          class: "thumb",
+          src,
+          alt: a.file,
+          title: fancyLabel(a.figId) + (a.panel ? " — panel " + a.panel : ""),
+        });
+        img.addEventListener("click", () => window.open(src, "_blank", "noopener"));
+        thumbs.appendChild(img);
+      }
+      msg.appendChild(thumbs);
+    }
+    if (attachedNote) {
+      msg.appendChild(el("div", { class: "attached" }, attachedNote));
+    }
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function addSystemMessage(text, isError) {
+    const container = $("#messages");
+    const cls = "msg system" + (isError ? " error" : "");
+    container.appendChild(el("div", { class: cls }, text));
+    container.scrollTop = container.scrollHeight;
+  }
+
+  // ============================================================
+  // API call
+  // ============================================================
+
+  function recentHistory() { return history.slice(-2 * MAX_HISTORY_TURNS); }
+  function truncate(s, n) { return !s ? "" : (s.length <= n ? s : s.slice(0, n) + "…"); }
+
+  async function callAnthropic(cfg, systemText, convo) {
+    const body = {
+      model: cfg.model,
+      max_tokens: 4096,
+      // Cache the full system prompt — same content every turn, so the cache
+      // hit drops per-turn input cost dramatically after the first call.
+      system: [{ type: "text", text: systemText, cache_control: { type: "ephemeral" } }],
+      messages: convo,
+    };
+    const res = await fetch(PROVIDER_DEFAULTS.anthropic.endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": cfg.apikey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true",
+      },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error("Anthropic API " + res.status + ": " + truncate(errText, 500));
+    }
+    const data = await res.json();
+    const parts = (data.content || []).filter(c => c.type === "text").map(c => c.text);
+    return parts.join("").trim();
+  }
+
+  async function callOpenAI(cfg, systemText, convo) {
+    // OpenAI doesn't accept Anthropic's image block shape; we convert.
+    // For OpenAI, images are sent as image_url blocks with a data: URI.
+    const messages = [{ role: "system", content: systemText }];
+    for (const m of convo) {
+      if (typeof m.content === "string") {
+        messages.push({ role: m.role, content: m.content });
+      } else {
+        const parts = [];
+        for (const c of m.content) {
+          if (c.type === "text") parts.push({ type: "text", text: c.text });
+          else if (c.type === "image") {
+            parts.push({
+              type: "image_url",
+              image_url: { url: "data:" + c.source.media_type + ";base64," + c.source.data },
+            });
+          }
+        }
+        messages.push({ role: m.role, content: parts });
+      }
+    }
+    const res = await fetch(PROVIDER_DEFAULTS.openai.endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": "Bearer " + cfg.apikey,
+      },
+      body: JSON.stringify({ model: cfg.model, messages }),
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error("OpenAI API " + res.status + ": " + truncate(errText, 500));
+    }
+    const data = await res.json();
+    return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || "").trim();
+  }
+
+  // ============================================================
+  // Ask flow
+  // ============================================================
+
+  async function ask(question) {
+    const cfg = getConfig();
+    if (!cfg.apikey) { openKeyModal(); return; }
+    if (!bundle.loaded) {
+      addSystemMessage("Paper bundle is still loading. Please wait…", true);
+      return;
+    }
+
+    // Resolve figure mentions to actual files BEFORE rendering the user
+    // bubble — we want to tell the user which figures got attached.
+    const detections = detectFigures(question);
+    const attachedFiles = [];
+    for (const d of detections) {
+      const panels = panelsFor(d);
+      for (const p of panels) {
+        attachedFiles.push({ figId: d.id, panel: d.panel, file: p.file });
+      }
+    }
+
+    const attachedNote = attachedFiles.length > 0
+      ? "Attached: " + attachedFiles.map(a => fancyLabel(a.figId) + (a.panel ? " (panel " + a.panel + ")" : "")).join(", ")
+      : null;
+    addMessage("user", question, attachedNote, attachedFiles);
+
+    // Fetch the PNGs in parallel and build the multimodal content block.
+    let images = [];
+    if (attachedFiles.length > 0) {
+      try {
+        const fetched = await Promise.all(attachedFiles.map(async (a) => {
+          const data = await fetchPngBase64(BUNDLE_BASE + "figures/" + a.file);
+          return { type: "image", source: { type: "base64", media_type: "image/png", data } };
+        }));
+        images = fetched;
+      } catch (err) {
+        addSystemMessage("Couldn't attach figure(s): " + (err && err.message || err), true);
+        images = [];
+      }
+    }
+
+    const userContent = images.length > 0
+      ? [...images, { type: "text", text: question }]
+      : question;
+
+    // Persist history with the SAME shape the API will see, so follow-up
+    // turns reference the prior attachments correctly.
+    history.push({ role: "user", content: userContent });
+
+    const thinking = el("div", { class: "msg assistant" },
+      el("div", { class: "bubble" }, "Thinking…")
+    );
+    $("#messages").appendChild(thinking);
+    $("#messages").scrollTop = $("#messages").scrollHeight;
+
+    $("#send-btn").disabled = true;
+    try {
+      const systemText = buildSystemText();
+      const answer = cfg.provider === "openai"
+        ? await callOpenAI(cfg, systemText, recentHistory())
+        : await callAnthropic(cfg, systemText, recentHistory());
+
+      thinking.remove();
+      if (!answer) {
+        addSystemMessage("The model returned an empty response.", true);
+        history.pop();
+      } else {
+        history.push({ role: "assistant", content: answer });
+        addMessage("assistant", answer, null);
+      }
+    } catch (err) {
+      thinking.remove();
+      addSystemMessage(String(err && err.message || err), true);
+      history.pop();
+    } finally {
+      updateSendButton();
+      $("#input").focus();
+    }
+  }
+
+  // ============================================================
+  // Wiring
+  // ============================================================
+
+  function bindSettings() {
+    $("#settings-btn").addEventListener("click", openKeyModal);
+    $("#save-key-btn").addEventListener("click", () => {
+      const provider = $("#provider-select").value;
+      let model = $("#model-input").value.trim();
+      if (!model) model = PROVIDER_DEFAULTS[provider].model;
+      const apikey = $("#apikey-input").value.trim();
+      if (!apikey) { alert("Please paste an API key."); return; }
+      saveConfig(provider, model, apikey);
+      closeKeyModal();
+      updateSendButton();
+      const where = storageBackend === "memory"
+        ? "memory only (sessionStorage is blocked here — key lost on reload)"
+        : "sessionStorage (this tab only)";
+      addSystemMessage("API key saved to " + where + ".");
+    });
+    $("#cancel-key-btn").addEventListener("click", closeKeyModal);
+    $("#clear-key-btn").addEventListener("click", () => {
+      clearConfig();
+      $("#apikey-input").value = "";
+      updateSendButton();
+      addSystemMessage("API key cleared.");
+      closeKeyModal();
+    });
+    $("#provider-select").addEventListener("change", (e) => {
+      const p = e.target.value;
+      const current = $("#model-input").value.trim();
+      if (!current
+          || current === PROVIDER_DEFAULTS.anthropic.model
+          || current === PROVIDER_DEFAULTS.openai.model) {
+        $("#model-input").value = PROVIDER_DEFAULTS[p].model;
+      }
+    });
+    $("#key-modal").addEventListener("click", (e) => {
+      if (e.target === $("#key-modal")) closeKeyModal();
+    });
+  }
+
+  function bindInput() {
+    const input = $("#input");
+    const form = $("#input-form");
+    input.addEventListener("input", () => {
+      input.style.height = "auto";
+      input.style.height = Math.min(160, input.scrollHeight) + "px";
+    });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); form.requestSubmit(); }
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const question = input.value.trim();
+      if (!question) return;
+      input.value = "";
+      input.style.height = "auto";
+      ask(question);
+    });
+    $("#clear-btn").addEventListener("click", () => {
+      history.length = 0;
+      $("#messages").innerHTML = "";
+      addSystemMessage("Chat cleared.");
+    });
+  }
+
+  function welcome() {
+    addSystemMessage(
+      "Ask any question about the paper. Try \"What's the main finding?\", " +
+      "\"Walk me through the IPCA setup\", \"Show me Figure 5\", " +
+      "or \"What does Table 2 conclude?\""
+    );
+  }
+
+  function installGlobalErrorHandler() {
+    window.addEventListener("error", (e) => {
+      try { addSystemMessage("Script error: " + (e.message || e.error || "unknown"), true); }
+      catch (_) {}
+    });
+    window.addEventListener("unhandledrejection", (e) => {
+      try {
+        const reason = e.reason && e.reason.message ? e.reason.message : String(e.reason);
+        addSystemMessage("Unhandled promise rejection: " + reason, true);
+      } catch (_) {}
+    });
+  }
+
+  function init() {
+    installGlobalErrorHandler();
+    bindSettings();
+    bindInput();
+    welcome();
+    loadBundle();
+    if (!hasApiKey()) setTimeout(openKeyModal, 250);
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

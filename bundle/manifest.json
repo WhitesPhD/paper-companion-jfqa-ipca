@@ -1,0 +1,372 @@
+{
+  "figures": [
+    {
+      "figure_id": "fig1",
+      "panel": "a",
+      "file": "fig1_a.png",
+      "original_file": "Figure1a_alpha_significance_daily_K=8_2yr.png",
+      "bytes": 141286,
+      "sha256": "8c86ba2ba1af7df8ed26626dde7bd923433ecf2d3ec63441c3dcaceb43c9d9d3"
+    },
+    {
+      "figure_id": "fig1",
+      "panel": "b",
+      "file": "fig1_b.png",
+      "original_file": "Figure1b_alpha_significance_daily_K=8_M5_2yr.png",
+      "bytes": 103001,
+      "sha256": "f7acef71f87b10d13175150699946980c64d4505baf46365c27386ee4b3eaa68"
+    },
+    {
+      "figure_id": "fig1",
+      "panel": "c",
+      "file": "fig1_c.png",
+      "original_file": "Figure1c_alpha_significance_daily_K=8_M6_2yr.png",
+      "bytes": 118211,
+      "sha256": "f946d5f205b8b8c7fbdd94714b3c5de49b7f6bb572d18862fb04fe14106fe9db"
+    },
+    {
+      "figure_id": "fig1",
+      "panel": "d",
+      "file": "fig1_d.png",
+      "original_file": "Figure1d_alpha_significance_daily_K=8_M7_2yr.png",
+      "bytes": 104383,
+      "sha256": "43fb55d444485d2603cc5456038fd9d248fc5e816c319686412c032098813a4c"
+    },
+    {
+      "figure_id": "fig2",
+      "panel": "a",
+      "file": "fig2_a.png",
+      "original_file": "Figure2a_alpha_significance_weekly_K=8_2yr.png",
+      "bytes": 151096,
+      "sha256": "6bd2e54ae2e07ba526980760c317fb4cb115b6cc5e8385020f5cb01ea1cea5d8"
+    },
+    {
+      "figure_id": "fig2",
+      "panel": "b",
+      "file": "fig2_b.png",
+      "original_file": "Figure2b_alpha_significance_weekly_K=8_M2_2yr.png",
+      "bytes": 125147,
+      "sha256": "b166eadfc67477b2711f0f3f20a562edbd5ad455c12387cd628d196815091f1f"
+    },
+    {
+      "figure_id": "fig2",
+      "panel": "c",
+      "file": "fig2_c.png",
+      "original_file": "Figure2c_alpha_significance_weekly_K=8_M6_2yr.png",
+      "bytes": 118369,
+      "sha256": "fff8b209a8d8f3608b0f6a9e8c13860ed79dea03d04ca9dafc18c4ce03e511f0"
+    },
+    {
+      "figure_id": "fig2",
+      "panel": "d",
+      "file": "fig2_d.png",
+      "original_file": "Figure2d_alpha_significance_weekly_K=8_M7_2yr.png",
+      "bytes": 125549,
+      "sha256": "e6f061b97f85a189bd99a59a062adbdedd00d50fa57de0f4e645b229f26f05b1"
+    },
+    {
+      "figure_id": "fig3",
+      "panel": "a",
+      "file": "fig3_a.png",
+      "original_file": "Figure3a_beta_significance_daily_K=8_M1_2yr.png",
+      "bytes": 106722,
+      "sha256": "87210df3821e8ca777cab0e4239ece82e4b02248fecb4da04a25d9ee448af209"
+    },
+    {
+      "figure_id": "fig3",
+      "panel": "b",
+      "file": "fig3_b.png",
+      "original_file": "Figure3b_beta_significance_daily_K=8_M6_2yr.png",
+      "bytes": 106999,
+      "sha256": "47470680f9b3c83e956f23bcc1ec43fd6915bf30b15799c7bf4bf7a72b7248a5"
+    },
+    {
+      "figure_id": "fig3",
+      "panel": "c",
+      "file": "fig3_c.png",
+      "original_file": "Figure3c_beta_significance_daily_K=8_M7_2yr.png",
+      "bytes": 99722,
+      "sha256": "16012da767aa252580c71908646a61d256633525f4650c013c204a223fae2a98"
+    },
+    {
+      "figure_id": "fig3",
+      "panel": "d",
+      "file": "fig3_d.png",
+      "original_file": "Figure3d_beta_significance_daily_K=8_M9_2yr.png",
+      "bytes": 153530,
+      "sha256": "6352ee2420499311ef7c14eac2c596c3e63d0aa372d5887133f1cb55e9072a7f"
+    },
+    {
+      "figure_id": "fig4",
+      "panel": "a",
+      "file": "fig4_a.png",
+      "original_file": "Figure4a_beta_significance_weekly_K=8_M1_2yr.png",
+      "bytes": 107733,
+      "sha256": "7a3b05d905f84aa5e8ac6a41299161529054e451b4d8b1af500132c6383d58ea"
+    },
+    {
+      "figure_id": "fig4",
+      "panel": "b",
+      "file": "fig4_b.png",
+      "original_file": "Figure4b_beta_significance_weekly_K=8_M2_2yr.png",
+      "bytes": 90185,
+      "sha256": "0a36f609543a14b5e6c3082deec715e8079dfe36fcf2b25110e519c7b3b82448"
+    },
+    {
+      "figure_id": "fig4",
+      "panel": "c",
+      "file": "fig4_c.png",
+      "original_file": "Figure4c_beta_significance_weekly_K=8_M4_2yr.png",
+      "bytes": 96609,
+      "sha256": "3aa059472768c17c92e778933677dfc7fd97c1477d5e11eefb0b4413d1fa0ebc"
+    },
+    {
+      "figure_id": "fig4",
+      "panel": "d",
+      "file": "fig4_d.png",
+      "original_file": "Figure4d_beta_significance_weekly_K=8_M9_2yr.png",
+      "bytes": 137802,
+      "sha256": "9f6411f0e0f6607a06f92f846ccd8d0e34350080575c8448c83a94cc77889936"
+    },
+    {
+      "figure_id": "fig5",
+      "panel": "",
+      "file": "fig5.png",
+      "original_file": "Figure5.png",
+      "bytes": 1022485,
+      "sha256": "cbc71b9744a8373c2e31989dca8de5753742c9c388dfda60f0d4ba6c1ad56abc"
+    },
+    {
+      "figure_id": "fig6",
+      "panel": "",
+      "file": "fig6.png",
+      "original_file": "Figure6.png",
+      "bytes": 880141,
+      "sha256": "94b763d36aff6648a1a9e79104d7d72cb30e557f66383467bfc874c34f394861"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "a",
+      "file": "appfig1_a.png",
+      "original_file": "AppendixFigure1a_alpha_significance_daily_K=8_M1_2yr.png",
+      "bytes": 102038,
+      "sha256": "e156c4ee00e198f5fded0b2490b0f591abdbeaa4e27b6a1a4003ee99ac602b06"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "b",
+      "file": "appfig1_b.png",
+      "original_file": "AppendixFigure1b_alpha_significance_daily_K=8_M2_2yr.png",
+      "bytes": 88303,
+      "sha256": "a821b4571e3fdbfb47a47660421cdb766434cefe047a54017f39dcae369fea4f"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "c",
+      "file": "appfig1_c.png",
+      "original_file": "AppendixFigure1c_alpha_significance_daily_K=8_M3_2yr.png",
+      "bytes": 81177,
+      "sha256": "d521d78c22b59d1ca324d873d5fe920469cfc41771778b85bebd9d0c189f1273"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "d",
+      "file": "appfig1_d.png",
+      "original_file": "AppendixFigure1d_alpha_significance_daily_K=8_M4_2yr.png",
+      "bytes": 87368,
+      "sha256": "cf1e7cd53b9c32b9aad67647b7e0d8e88cb7ca03833406cd159f40607ecf4334"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "e",
+      "file": "appfig1_e.png",
+      "original_file": "AppendixFigure1e_alpha_significance_daily_K=8_M8_2yr.png",
+      "bytes": 65806,
+      "sha256": "006a1fc675cf02cbe30aa7b31561552b334b9fa1e29a2368064fb4efefe0af68"
+    },
+    {
+      "figure_id": "appfig1",
+      "panel": "f",
+      "file": "appfig1_f.png",
+      "original_file": "AppendixFigure1f_alpha_significance_daily_K=8_M9_2yr.png",
+      "bytes": 96456,
+      "sha256": "6e4ed726d0c463fb271214f911cf5fadd893bbfbad0ff2531d1fcd945b8eb99b"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "a",
+      "file": "appfig2_a.png",
+      "original_file": "AppendixFigure2a_alpha_significance_weekly_K=8_M1_2yr.png",
+      "bytes": 122975,
+      "sha256": "b0dcde4eea36bf7c313bcc6fb968feff7c3671ba87d51a5aae170cc234a19938"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "b",
+      "file": "appfig2_b.png",
+      "original_file": "AppendixFigure2b_alpha_significance_weekly_K=8_M3_2yr.png",
+      "bytes": 113826,
+      "sha256": "d8d4fdc2282f46671c71492b15346b69209884ddf1a19474e43b8bc0073950bc"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "c",
+      "file": "appfig2_c.png",
+      "original_file": "AppendixFigure2c_alpha_significance_weekly_K=8_M4_2yr.png",
+      "bytes": 99858,
+      "sha256": "b71b2063cf35365dec1f1773c9b8d3110ee6fbae7263936852088a8e704316ee"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "d",
+      "file": "appfig2_d.png",
+      "original_file": "AppendixFigure2d_alpha_significance_weekly_K=8_M5_2yr.png",
+      "bytes": 109097,
+      "sha256": "0e895022c333aba47220f721ad36e6fdf169b5070f02eb840a09952ab0a6f1f6"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "e",
+      "file": "appfig2_e.png",
+      "original_file": "AppendixFigure2e_alpha_significance_weekly_K=8_M8_2yr.png",
+      "bytes": 106049,
+      "sha256": "4167b77c23a5de8572ac60f5d046532146cd575d755f20e025294da5c86fba01"
+    },
+    {
+      "figure_id": "appfig2",
+      "panel": "f",
+      "file": "appfig2_f.png",
+      "original_file": "AppendixFigure2f_alpha_significance_weekly_K=8_M9_2yr.png",
+      "bytes": 93718,
+      "sha256": "caae7cd8d00bacaf69bfb1e6f403952442698ca3d09d3e5d4a95c0f6ed87cc95"
+    },
+    {
+      "figure_id": "appfig3",
+      "panel": "a",
+      "file": "appfig3_a.png",
+      "original_file": "AppendixFigure3a_beta_significance_daily_K=8_M2_2yr.png",
+      "bytes": 93567,
+      "sha256": "92cb402c59157d8bad57529c000f1fd222259a4a5236b43e0ddb19bab7159808"
+    },
+    {
+      "figure_id": "appfig3",
+      "panel": "b",
+      "file": "appfig3_b.png",
+      "original_file": "AppendixFigure3b_beta_significance_daily_K=8_M3_2yr.png",
+      "bytes": 91629,
+      "sha256": "ed3c0542dca543e1d6f46753a17af3687bc5df3935c425f4e8fc0d03f04212d2"
+    },
+    {
+      "figure_id": "appfig3",
+      "panel": "c",
+      "file": "appfig3_c.png",
+      "original_file": "AppendixFigure3c_beta_significance_daily_K=8_M4_2yr.png",
+      "bytes": 102020,
+      "sha256": "91b7e8a53b1dacb07e18b60ad82088d6101d3a42e4036597b5a46d263a706700"
+    },
+    {
+      "figure_id": "appfig3",
+      "panel": "d",
+      "file": "appfig3_d.png",
+      "original_file": "AppendixFigure3d_beta_significance_daily_K=8_M5_2yr.png",
+      "bytes": 95793,
+      "sha256": "41c41dcd22c403f47039fd3eccdb4719b2e11e8e5422a8d7cfaebd39b6d4fd6a"
+    },
+    {
+      "figure_id": "appfig3",
+      "panel": "e",
+      "file": "appfig3_e.png",
+      "original_file": "AppendixFigure3e_beta_significance_daily_K=8_M8_2yr.png",
+      "bytes": 58734,
+      "sha256": "797cd07cf0728c30a6eff07bc05c97604df5874cf14365450cc64d5eeef0743b"
+    },
+    {
+      "figure_id": "appfig4",
+      "panel": "a",
+      "file": "appfig4_a.png",
+      "original_file": "AppendixFigure4a_beta_significance_weekly_K=8_M3_2yr.png",
+      "bytes": 105218,
+      "sha256": "c9a1283c78cbe621476070cff48e97a90072702aa5a431346638074fef28e23f"
+    },
+    {
+      "figure_id": "appfig4",
+      "panel": "b",
+      "file": "appfig4_b.png",
+      "original_file": "AppendixFigure4b_beta_significance_weekly_K=8_M5_2yr.png",
+      "bytes": 98999,
+      "sha256": "46aa5a5cb2401044eb214599f6fa87c763baf65d7e373f59b7c10070cb5c0186"
+    },
+    {
+      "figure_id": "appfig4",
+      "panel": "c",
+      "file": "appfig4_c.png",
+      "original_file": "AppendixFigure4c_beta_significance_weekly_K=8_M6_2yr.png",
+      "bytes": 110386,
+      "sha256": "9910a492b6f55a118ba3fa178407a193e349cd0bd99b81039d2f57ad955879dc"
+    },
+    {
+      "figure_id": "appfig4",
+      "panel": "d",
+      "file": "appfig4_d.png",
+      "original_file": "AppendixFigure4d_beta_significance_weekly_K=8_M7_2yr.png",
+      "bytes": 117109,
+      "sha256": "604e207daee1765ec71c575d7a88733c0f1cc83e84b826d8dfb146249200993f"
+    },
+    {
+      "figure_id": "appfig4",
+      "panel": "e",
+      "file": "appfig4_e.png",
+      "original_file": "AppendixFigure4e_beta_significance_weekly_K=8_M8_2yr.png",
+      "bytes": 95111,
+      "sha256": "a4d2c74a0e6ba88ec923df081c7f9e34b02891a12bea6100cbf9852b99dc6d50"
+    },
+    {
+      "figure_id": "appfig5",
+      "panel": "",
+      "file": "appfig5.png",
+      "original_file": "AppendixFigure5.png",
+      "bytes": 652160,
+      "sha256": "5a7f1fdce5369dfe90e042ef9b0a9e08ac6bed8b03ef880c5c12838bca576450"
+    },
+    {
+      "figure_id": "appfig6",
+      "panel": "a",
+      "file": "appfig6_a.png",
+      "original_file": "AppendixFigure6a.png",
+      "bytes": 294271,
+      "sha256": "e4ca2023073a1accf452723e8cb3242360622e1ddb61821d7dc640e662a74154"
+    },
+    {
+      "figure_id": "appfig6",
+      "panel": "b",
+      "file": "appfig6_b.png",
+      "original_file": "AppendixFigure6b.png",
+      "bytes": 246027,
+      "sha256": "2cfd17f0be62fc46f014a07599e8b5f1c3b0b150efcb32fdffeddb9eb625a470"
+    },
+    {
+      "figure_id": "appfig6",
+      "panel": "c",
+      "file": "appfig6_c.png",
+      "original_file": "AppendixFigure6c.png",
+      "bytes": 312796,
+      "sha256": "2f12d9834052307c3f3ba09c8ba0428549197fcd42508e0b7d63f3d3142fe1c2"
+    },
+    {
+      "figure_id": "appfig6",
+      "panel": "d",
+      "file": "appfig6_d.png",
+      "original_file": "AppendixFigure6d.png",
+      "bytes": 274567,
+      "sha256": "40e3394eb8475bf0ef568a09c5f1a106baf2232a8230ed43c73a192736cd00e0"
+    },
+    {
+      "figure_id": "appfig7",
+      "panel": "",
+      "file": "appfig7.png",
+      "original_file": "AppendixFigure7.png",
+      "bytes": 118811,
+      "sha256": "bfdf478e8873b3cf9e3d6c78ef44c0c79a0048726bd5b4e4d3367be1663bba55"
+    }
+  ]
+}
