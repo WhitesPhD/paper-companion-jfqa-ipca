@@ -127,24 +127,25 @@
     margin-right: 4px;
   }
 
-  /* Inline figure thumbnails attached to a user message. */
-  .msg .thumbs {
+  /* Inline figure thumbnails attached to a user message — rendered inside
+     the bubble above the question text so they read as one composed
+     message. The bubble grows to fit them. */
+  .msg .bubble .thumbs {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-top: 8px;
+    margin-bottom: 8px;
   }
-  .msg.user .thumbs { justify-content: flex-end; }
   .msg .thumb {
     max-width: 130px;
     max-height: 130px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 4px;
     background: white;
     cursor: zoom-in;
     object-fit: contain;
   }
-  .msg .thumb:hover { border-color: var(--accent); }
+  .msg .thumb:hover { border-color: rgba(255, 255, 255, 0.7); }
   #sidebar .status {
     font-size: 11px;
     color: var(--muted);
@@ -946,14 +947,9 @@
     const container = $("#messages");
     const msg = el("div", { class: "msg " + role });
     const bubble = el("div", { class: "bubble" });
-    if (role === "assistant") {
-      const html = renderAssistantHTML(text);
-      if (html != null) { bubble.classList.add("markdown"); bubble.innerHTML = html; }
-      else { bubble.textContent = text; }
-    } else {
-      bubble.textContent = text;
-    }
-    msg.appendChild(bubble);
+
+    // Thumbnails go INSIDE the bubble, ahead of the text. The bubble grows
+    // to fit them and the attachment reads as one composed message.
     if (attachedFiles && attachedFiles.length > 0) {
       const thumbs = el("div", { class: "thumbs" });
       for (const a of attachedFiles) {
@@ -967,11 +963,30 @@
         img.addEventListener("click", () => window.open(src, "_blank", "noopener"));
         thumbs.appendChild(img);
       }
-      msg.appendChild(thumbs);
+      bubble.appendChild(thumbs);
     }
-    if (attachedNote) {
-      msg.appendChild(el("div", { class: "attached" }, attachedNote));
+
+    if (role === "assistant") {
+      const html = renderAssistantHTML(text);
+      if (html != null) {
+        bubble.classList.add("markdown");
+        // Parse the HTML in a detached element, then move children into the
+        // bubble so the `.bubble.markdown > *:first-child { margin-top: 0 }`
+        // rule keeps targeting the actual first heading/paragraph rather
+        // than an intermediate wrapper. (Assistant messages don't currently
+        // carry attachedFiles, but lifting the children also preserves any
+        // future thumbs container appended above.)
+        const tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        while (tmp.firstChild) bubble.appendChild(tmp.firstChild);
+      } else {
+        bubble.appendChild(document.createTextNode(text));
+      }
+    } else {
+      bubble.appendChild(document.createTextNode(text));
     }
+
+    msg.appendChild(bubble);
     container.appendChild(msg);
     container.scrollTop = container.scrollHeight;
   }
