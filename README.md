@@ -31,8 +31,9 @@ bundle/               What the widget loads at runtime.
                         (fig5.png, appfig6_c.png, …).
   manifest.json         Per-file size + sha256, for cache-busting.
 
-scripts/              Build pipeline. `bash scripts/build.sh` regenerates the
-                      whole bundle in the right order.
+scripts/              Build pipeline. Five Python scripts that read the
+                      manuscript and replication trees and write `bundle/`.
+                      Run via `bash scripts/build.sh`.
 
 eval/questions.md     20 reader questions across 4 audience tiers
                       (journalist, practitioner, MSc, PhD) for accuracy checks.
@@ -51,32 +52,41 @@ replication package is on
 - **Multimodal, on request.** Naming a figure ("Show me Figure 5", "Appendix
   Figure 6c") attaches the PNG(s) to that turn's API request — the model
   describes what's actually in the image rather than paraphrasing the caption.
-- **BYOK.** Your API key lives in `sessionStorage`, never leaves your browser,
-  wipes when you close the tab.
+- **BYOK.** The API key lives in `sessionStorage`, never leaves the browser,
+  wipes when the tab closes.
 
-The widget was adapted from the
-[ECOM215 course chat](https://github.com/WhitesPhD/ECOM215/tree/main/chat) —
-same UI shell and BYOK pattern, different problem (one paper in long context
-vs. a chunked course corpus with RAG).
+## Adapting this for another paper
 
-## Building the bundle locally
+To build a similar companion for a different paper, clone this repo as a
+template and replace the per-paper pieces:
 
-If you have the source materials (`manuscript/JFQA_IPCA.tex`,
-`manuscript/Appendix.tex`, `manuscript/Figures/*`, `manuscript/Tables/*`, the
-`biblibrary.bib`, and the `replication/` tree from Dataverse):
+1. **Drop your sources beside the existing folders.** You'll need a
+   `manuscript/` with the main `.tex`, an `Appendix.tex`, `Figures/`,
+   `Tables/`, and `biblibrary.bib`; and a `replication/` tree from your
+   data/code archive.
 
-```bash
-bash scripts/build.sh
-```
+2. **Edit `scripts/extract_metadata.py`** — update the hard-coded title,
+   authors, journal, DOI, and any paper-specific structures (this repo
+   carries a `characteristic_groups` map for the IPCA factor families; your
+   paper will have its own).
 
-That runs five scripts in order: `extract_metadata.py`, `extract_refs.py`,
-`extract_code.py`, `tex_to_md.py`, `assemble_bundle.py`. Output lands in
-`bundle/`. To preview before pushing:
+3. **Edit `scripts/extract_code.py`** — change the inclusion list to point
+   at the replication files you want bundled into `replication.md`.
 
-```bash
-python3 -m http.server 8000
-# visit http://localhost:8000/chat/
-```
+4. **Edit `chat/index.html`** — update the page title, the header subtitle,
+   the system-prompt audience and instructions, and the welcome message.
+
+5. **Run the pipeline:**
+
+   ```bash
+   bash scripts/build.sh
+   ```
+
+   This runs `extract_metadata.py`, `extract_refs.py`, `extract_code.py`,
+   `tex_to_md.py`, `assemble_bundle.py` in order. Output lands in `bundle/`.
+
+6. **Push to a GitHub Pages-enabled repo** and point Pages at the `main`
+   branch. The live URL serves `chat/index.html` directly.
 
 ## License
 
