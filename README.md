@@ -7,7 +7,9 @@ the full paper text, the cited references, the table data, and a curated
 subset of the replication code into the model's context every turn, so answers
 stay grounded in the paper rather than the model's training data.
 
-→ **Live:** <https://whitesphd.github.io/paper-companion-jfqa-ipca/chat/>
+→ **Live (standalone):** <https://whitesphd.github.io/paper-companion-jfqa-ipca/chat/>
+→ **Embedded:** opens as a modal from the publication page at
+  <https://www.whitesphd.com/publications/pub1/>
 
 ## What's in this repo
 
@@ -87,6 +89,24 @@ template and replace the per-paper pieces:
 
 6. **Push to a GitHub Pages-enabled repo** and point Pages at the `main`
    branch. The live URL serves `chat/index.html` directly.
+
+## Embedding on a host page
+
+The widget can be opened in-page from a host site (project page, paper
+landing page, etc.) via a small modal that lazy-loads the standalone
+URL into an iframe on first open. The pattern used at
+<https://www.whitesphd.com/publications/pub1/> is a single block of
+HTML/CSS/JS dropped into the page markup — a button labelled "Ask the
+paper", a hidden overlay containing the iframe, and ~25 lines of JS for
+open/close handlers (×, outside-click, Escape). Two prerequisites:
+
+- The widget's static URL must be reachable (GitHub Pages enabled, repo
+  public or on a paid plan).
+- The host site must allow raw HTML in its content (for Hugo, set
+  `markup.goldmark.renderer.unsafe: true` in the site config).
+
+The iframe stays mounted between opens so chat state and the API key
+in `sessionStorage` persist within a single page visit.
 
 ## License
 
