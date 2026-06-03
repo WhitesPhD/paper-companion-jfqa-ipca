@@ -70,7 +70,40 @@ replication package is on
 - **BYOK.** The API key lives in `sessionStorage`, never leaves the browser,
   wipes when the tab closes.
 
+## Security and privacy
+
+BYOK by design. The widget makes API calls directly from the reader's browser
+to the provider the reader chose (Anthropic or OpenAI), with the reader's own
+API key.
+
+- The API key lives only in the tab's `sessionStorage`. It is never sent to
+  any server other than the chosen provider's API endpoint, and is wiped when
+  the tab closes.
+- There is no telemetry, analytics, or logging in the widget.
+- The Anthropic call uses the `anthropic-dangerous-direct-browser-access`
+  header — Anthropic's deliberately-named opt-in for BYOK browser apps. It
+  does not transmit any extra data.
+- The widget's source is one auditable static HTML file (`chat/index.html`);
+  the bundle it loads is the handful of files in `bundle/`.
+
+If you embed this widget on your own site by iframing the GitHub Pages URL
+from this repo, you are trusting the maintainer not to push a future commit
+that logs keys. For defensive deployment, fork the repo, point GitHub Pages
+at your fork, and iframe your fork's URL.
+
 ## Adapting this for another paper
+
+### Before you start
+
+You are responsible for verifying that (a) your paper's publication terms
+permit redistributing the full text and figures — Creative Commons
+Attribution licences do; many subscription-journal accepted-manuscript
+policies do not cover the typeset version — and (b) anything you bundle from
+your replication package is yours to redistribute (some replication trees
+depend on data feeds with terms that don't permit re-distribution, e.g.
+proprietary market data).
+
+### Steps
 
 To build a similar companion for a different paper, clone this repo as a
 template and replace the per-paper pieces:
@@ -123,10 +156,20 @@ in `sessionStorage` persist within a single page visit.
 
 ## License
 
-Code in this repo (the widget and build scripts): MIT.
+Code in this repo — the widget (`chat/index.html`), the build scripts under
+`scripts/`, and the reader-eval set under `eval/` — is released under the
+**MIT License**.
 
-The paper text and figures included under `bundle/` belong to the authors and
-are posted under the open-access terms of the *Journal of Financial and
-Quantitative Analysis*. The canonical version of the paper is at
-<https://doi.org/10.1017/S0022109025102329>; the canonical replication
-package is at <https://doi.org/10.7910/DVN/IQR5DH>.
+The paper materials reproduced in `bundle/` — the full paper text
+(`paper.md`), the figure panels (`figures/`), and the curated replication
+excerpts (`replication.md`) — come from:
+
+> Babiak, M., and Bianchi, D. "Mispricing and Risk Compensation in
+> Cryptocurrency Returns." *Journal of Financial and Quantitative Analysis*,
+> 2026. <https://doi.org/10.1017/S0022109025102329>
+
+published as Open Access under the **[Creative Commons Attribution 4.0
+International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)**
+licence. Re-use, redistribution, and adaptation are permitted with
+attribution. The canonical replication package is at
+<https://doi.org/10.7910/DVN/IQR5DH>.
