@@ -3,9 +3,10 @@
 A BYOK (bring-your-own-key) chat widget that helps readers of [Babiak &
 Bianchi, *JFQA* 2026](https://doi.org/10.1017/S0022109025102329) understand
 the paper. Paste an Anthropic or OpenAI key, ask a question. The widget loads
-the full paper text, the cited references, the table data, and a curated
-subset of the replication code into the model's context every turn, so answers
-stay grounded in the paper rather than the model's training data.
+the full paper text, the cited references, and the table data into the
+model's context every turn — and the curated replication code on demand,
+behind an opt-in sidebar toggle — so answers stay grounded in the paper
+rather than the model's training data.
 
 → **Embedded:** opens as a modal from the publication page at
   <https://www.whitesphd.com/publications/pub1/>
@@ -27,7 +28,10 @@ bundle/               What the widget loads at runtime.
   references.json       Cited works only (extracted from biblibrary.bib).
   replication.md        Curated subset of the replication package: the data
                         pipeline (data_chrs.py, data_cleaning.py, …) and the
-                        IPCA estimator library (ipca.py).
+                        IPCA estimator library (ipca.py). Loaded into the
+                        model's context only when the reader ticks "Include
+                        replication code" in the sidebar — keeps the default
+                        prompt small enough to fit Tier 1 rate limits.
   figures/*.png         Every figure panel, renamed under stable IDs
                         (fig5.png, appfig6_c.png, …).
   manifest.json         Per-file size + sha256, for cache-busting.
@@ -47,12 +51,22 @@ replication package is on
 
 ## Design choices
 
-- **Long-context, not RAG.** The full paper goes into the system prompt every
-  turn. Anthropic prompt caching keeps per-turn cost reasonable after the
+- **Long-context, not RAG.** The full paper text plus a structured metadata
+  index and the cited references go into the system prompt every turn
+  (≈45k tokens). Anthropic prompt caching keeps per-turn cost low after the
   first call.
+- **Replication code is opt-in.** A sidebar toggle ("Include replication
+  code") attaches the curated source on the next call (~50k extra tokens).
+  Off by default so the cached prefix fits a Tier 1 Anthropic key on Haiku
+  4.5 (50k input tokens/min). The widget retries once on a 429, surfacing
+  the wait time and pointing the reader at the toggle or a tier upgrade.
 - **Multimodal, on request.** Naming a figure ("Show me Figure 5", "Appendix
   Figure 6c") attaches the PNG(s) to that turn's API request — the model
   describes what's actually in the image rather than paraphrasing the caption.
+- **Grounded definitions.** A "Definitional questions" block in the system
+  prompt tells the model to quote the paper's exact definition of a concept
+  with a section/table cite, and not to enumerate sibling characteristics
+  from the same group as alternative measures of the same construct.
 - **BYOK.** The API key lives in `sessionStorage`, never leaves the browser,
   wipes when the tab closes.
 
