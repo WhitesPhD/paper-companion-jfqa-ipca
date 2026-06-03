@@ -126,6 +126,22 @@
     color: var(--muted);
     margin-right: 4px;
   }
+  #sidebar .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    cursor: pointer;
+    color: var(--dark);
+  }
+  #sidebar .opt input { margin-top: 2px; cursor: pointer; }
+  #sidebar .opt-help {
+    margin: 6px 0 0 24px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
 
   /* Inline figure thumbnails attached to a user message — rendered inside
      the bubble above the question text so they read as one composed
@@ -448,6 +464,18 @@
         <h3>Contents</h3>
         <div id="toc"></div>
       </div>
+      <div class="group">
+        <h3>Options</h3>
+        <label class="opt">
+          <input type="checkbox" id="opt-include-replication">
+          <span>Include replication code</span>
+        </label>
+        <p class="opt-help">
+          Adds ~50k input tokens for code questions. Off by default so the
+          first call after a fresh cache fits a Tier&nbsp;1 rate limit
+          (50k input tokens/min on Haiku).
+        </p>
+      </div>
       <div class="status" id="status"></div>
     </aside>
 
@@ -513,9 +541,13 @@
 
   const PROVIDER_DEFAULTS = {
     anthropic: {
-      // Haiku at the default: Tier 1 TPM caps it higher than Sonnet, and the
-      // ~100k-token paper bundle won't fit Sonnet's 30k/min on a free key.
-      // Bump to claude-sonnet-4-6 once you're on Tier 2+ for sharper answers.
+      // Haiku at the default: it has the highest Tier 1 ITPM (50k) of the
+      // current Anthropic models. The default system prompt (paper +
+      // metadata + refs, NO replication code) is roughly 45k tokens, so the
+      // first call after a fresh cache fits with a little headroom. The
+      // "Include replication code" sidebar toggle adds ~50k more tokens and
+      // is off by default; readers on Tier 2+ can turn it on without 429s.
+      // Bump to claude-sonnet-4-6 for sharper answers if you're on Tier 2+.
       model: "claude-haiku-4-5-20251001",
       endpoint: "https://api.anthropic.com/v1/messages",
     },
@@ -526,9 +558,10 @@
   };
 
   const STORAGE = {
-    provider: "jfqa1.provider",
-    model:    "jfqa1.model",
-    apikey:   "jfqa1.apikey",
+    provider:           "jfqa1.provider",
+    model:              "jfqa1.model",
+    apikey:             "jfqa1.apikey",
+    includeReplication: "jfqa1.includeRepl",
   };
 
   // sessionStorage can throw SecurityError in sandboxed iframes; fall back
@@ -789,40 +822,56 @@
   // System-prompt construction
   // ============================================================
 
-  const INSTRUCTIONS = [
-    "You are a reader's companion for the paper:",
-    "  \"Mispricing and Risk Compensation in Cryptocurrency Returns\"",
-    "  by Mykola Babiak and Daniele Bianchi, Journal of Financial and Quantitative Analysis (forthcoming, 2026).",
-    "",
-    "Audience: practitioners with crypto exposure, financial journalists, MSc finance students, and PhD finance students. Quantitatively literate but not necessarily academic researchers.",
-    "",
-    "How to answer:",
-    "- Intuition first, formalism only when the user signals they want it (PhD-level phrasing, references to specific equations, asks for the technical detail).",
-    "- Calibrate the depth to the user's apparent expertise. A journalist gets the headline finding; a PhD student gets the IPCA mechanics.",
-    "- Be direct. State the answer first, then the supporting evidence from the paper. Avoid hedging phrases like \"the paper suggests\", \"I think\", \"it might be\" unless the paper itself genuinely hedges.",
-    "- Cite specific numbers, tables, and figures from the paper whenever they back the claim. Refer to tables and figures by their displayed label (e.g. \"Table 2\", \"Figure 5\", \"Table A1\", \"Figure A6\").",
-    "- Render math in LaTeX between $...$ (inline) or $$...$$ (display) — the widget renders KaTeX.",
-    "- Use Markdown headings, lists, and tables when they aid clarity.",
-    "- Do NOT invent results. If the paper does not answer the user's question, say so and, where possible, point to a related result.",
-    "- Do NOT prefix replies with meta-disclaimers (\"Based on the paper...\", \"From what I can see...\"). Just answer.",
-    "",
-    "Figure handling:",
-    "- When the reader names a figure (e.g. \"Figure 5\", \"Appendix Figure 6c\"), the widget attaches the corresponding figure panel(s) from the paper to the reader's message. These images are reproduced from the paper — they are NOT user uploads. Treat them as the published figure.",
-    "- Refer to them as \"Figure 5\", \"Panel (a)\", or by sub-caption — never as \"the image you've shared\", \"the attached image\", \"the picture you uploaded\", or similar phrasings that frame them as user-supplied. The reader knows the image came from the paper.",
-    "- Describe what's visible and tie it back to the paper's claims, the relevant section, and any related tables.",
-    "- When the reader asks about a figure that wasn't attached, you can still answer from the figure's caption/description in the paper text — but say you don't have the image in front of you.",
-    "",
-    "Replication code:",
-    "- A curated subset of the replication package (the data-pipeline scripts and the IPCA estimator library) is included after the references. When the reader asks \"how is X computed?\" or \"how does the estimator actually work?\", quote the relevant function from those files instead of paraphrasing — the actual formula matters.",
-    "- Per-table and per-figure scripts (CODE/Figure_*.py, CODE/Table_*.py) are NOT bundled. If the reader needs one of those, point them at the README mapping and the Harvard Dataverse package.",
-    "",
-    "What follows: the complete paper text, the structured metadata index, the cited references, and the curated replication code. Use all four.",
-  ].join("\n");
+  // INSTRUCTIONS is built per-turn so the "Replication code" section can
+  // tell the model the truth about whether the source is loaded into context
+  // this call. The reader controls inclusion via a sidebar toggle; default
+  // is off so the cached prefix fits Tier 1's 50k ITPM on a fresh cache.
+  function instructionsFor(includeReplication) {
+    const head = [
+      "You are a reader's companion for the paper:",
+      "  \"Mispricing and Risk Compensation in Cryptocurrency Returns\"",
+      "  by Mykola Babiak and Daniele Bianchi, Journal of Financial and Quantitative Analysis (forthcoming, 2026).",
+      "",
+      "Audience: practitioners with crypto exposure, financial journalists, MSc finance students, and PhD finance students. Quantitatively literate but not necessarily academic researchers.",
+      "",
+      "How to answer:",
+      "- Intuition first, formalism only when the user signals they want it (PhD-level phrasing, references to specific equations, asks for the technical detail).",
+      "- Calibrate the depth to the user's apparent expertise. A journalist gets the headline finding; a PhD student gets the IPCA mechanics.",
+      "- Be direct. State the answer first, then the supporting evidence from the paper. Avoid hedging phrases like \"the paper suggests\", \"I think\", \"it might be\" unless the paper itself genuinely hedges.",
+      "- Cite specific numbers, tables, and figures from the paper whenever they back the claim. Refer to tables and figures by their displayed label (e.g. \"Table 2\", \"Figure 5\", \"Table A1\", \"Figure A6\").",
+      "- Render math in LaTeX between $...$ (inline) or $$...$$ (display) — the widget renders KaTeX.",
+      "- Use Markdown headings, lists, and tables when they aid clarity.",
+      "- Do NOT invent results. If the paper does not answer the user's question, say so and, where possible, point to a related result.",
+      "- Do NOT prefix replies with meta-disclaimers (\"Based on the paper...\", \"From what I can see...\"). Just answer.",
+      "",
+      "Figure handling:",
+      "- When the reader names a figure (e.g. \"Figure 5\", \"Appendix Figure 6c\"), the widget attaches the corresponding figure panel(s) from the paper to the reader's message. These images are reproduced from the paper — they are NOT user uploads. Treat them as the published figure.",
+      "- Refer to them as \"Figure 5\", \"Panel (a)\", or by sub-caption — never as \"the image you've shared\", \"the attached image\", \"the picture you uploaded\", or similar phrasings that frame them as user-supplied. The reader knows the image came from the paper.",
+      "- Describe what's visible and tie it back to the paper's claims, the relevant section, and any related tables.",
+      "- When the reader asks about a figure that wasn't attached, you can still answer from the figure's caption/description in the paper text — but say you don't have the image in front of you.",
+      "",
+      "Replication code:",
+    ];
+    const replOn = [
+      "- A curated subset of the replication package (the data-pipeline scripts and the IPCA estimator library) is included after the references. When the reader asks \"how is X computed?\" or \"how does the estimator actually work?\", quote the relevant function from those files instead of paraphrasing — the actual formula matters.",
+      "- Per-table and per-figure scripts (CODE/Figure_*.py, CODE/Table_*.py) are NOT bundled. If the reader needs one of those, point them at the README mapping and the Harvard Dataverse package.",
+      "",
+      "What follows: the complete paper text, the structured metadata index, the cited references, and the curated replication code. Use all four.",
+    ];
+    const replOff = [
+      "- The replication package is NOT loaded into context on this call. The reader keeps it off by default so the per-turn input fits a Tier 1 rate limit. They can attach it on the next call by toggling \"Include replication code\" in the sidebar.",
+      "- If the reader asks an implementation-level question (\"how is X computed?\", \"how does the estimator actually work?\"), answer from the paper text and the equations it states. Be honest that the source code isn't in front of you for a verbatim quote, and offer two pointers: (1) toggle the sidebar option to load the code into the next call, or (2) consult the Harvard Dataverse replication package (DOI 10.7910/DVN/IQR5DH) for the full source.",
+      "",
+      "What follows: the complete paper text, the structured metadata index, and the cited references. Use all three.",
+    ];
+    return head.concat(includeReplication ? replOn : replOff).join("\n");
+  }
 
   function buildSystemText() {
     const m = bundle.metadata;
+    const includeReplication = getIncludeReplication();
     const sections = [
-      INSTRUCTIONS,
+      instructionsFor(includeReplication),
       "\n\n========== PAPER ==========\n",
       bundle.paper,
       "\n\n========== METADATA INDEX ==========\n",
@@ -852,7 +901,7 @@
       "\n\n========== CITED REFERENCES ==========\n",
       JSON.stringify(bundle.refs, null, 2),
     ];
-    if (bundle.replication) {
+    if (includeReplication && bundle.replication) {
       sections.push("\n\n========== REPLICATION CODE (curated) ==========\n");
       sections.push(bundle.replication);
     }
@@ -879,6 +928,13 @@
     safeStorage.removeItem(STORAGE.provider);
     safeStorage.removeItem(STORAGE.model);
     safeStorage.removeItem(STORAGE.apikey);
+  }
+  function getIncludeReplication() {
+    return safeStorage.getItem(STORAGE.includeReplication) === "1";
+  }
+  function setIncludeReplication(on) {
+    if (on) safeStorage.setItem(STORAGE.includeReplication, "1");
+    else safeStorage.removeItem(STORAGE.includeReplication);
   }
   function openKeyModal() {
     const cfg = getConfig();
@@ -1007,8 +1063,30 @@
 
   function recentHistory() { return history.slice(-2 * MAX_HISTORY_TURNS); }
   function truncate(s, n) { return !s ? "" : (s.length <= n ? s : s.slice(0, n) + "…"); }
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-  async function callAnthropic(cfg, systemText, convo) {
+  // Parse a Retry-After header. The spec allows either a non-negative integer
+  // (seconds) or an HTTP date; Anthropic and OpenAI both emit seconds in
+  // practice, but we accept both. Floored at 5s so an empty/zero header still
+  // lets the bucket drain; capped at 120s so a misbehaving server can't park
+  // the widget indefinitely.
+  function parseRetryAfter(headerVal, fallbackSec) {
+    const fb = Math.max(5, Math.min(120, fallbackSec || 30));
+    if (!headerVal) return fb;
+    const n = parseFloat(headerVal);
+    if (Number.isFinite(n) && n > 0) {
+      return Math.min(120, Math.max(5, Math.ceil(n)));
+    }
+    const dateMs = Date.parse(headerVal);
+    if (Number.isFinite(dateMs)) {
+      const sec = Math.ceil((dateMs - Date.now()) / 1000);
+      if (sec > 0) return Math.min(120, Math.max(5, sec));
+    }
+    return fb;
+  }
+
+  async function callAnthropic(cfg, systemText, convo, attempt) {
+    attempt = attempt || 0;
     const body = {
       model: cfg.model,
       max_tokens: 4096,
@@ -1027,6 +1105,21 @@
       },
       body: JSON.stringify(body),
     });
+    // 429 = per-minute input token (or RPM) bucket exhausted. On Tier 1 with
+    // a fresh cache this is the most common failure: the system prompt alone
+    // eats ~45k of the 50k ITPM budget. One retry with the server-supplied
+    // Retry-After is enough to ride out the minute window.
+    if (res.status === 429 && attempt === 0) {
+      const wait = parseRetryAfter(res.headers.get("retry-after"), 30);
+      addSystemMessage(
+        "Hit Anthropic's per-minute input-token limit. Waiting " + wait +
+        "s and retrying once. Turning off \"Include replication code\" in the " +
+        "sidebar (if it's on) roughly halves the per-turn cost; upgrading the " +
+        "API key to Tier 2 lifts the ceiling to 200k tokens/min."
+      );
+      await sleep(wait * 1000);
+      return callAnthropic(cfg, systemText, convo, attempt + 1);
+    }
     if (!res.ok) {
       const errText = await res.text();
       throw new Error("Anthropic API " + res.status + ": " + truncate(errText, 500));
@@ -1036,7 +1129,8 @@
     return parts.join("").trim();
   }
 
-  async function callOpenAI(cfg, systemText, convo) {
+  async function callOpenAI(cfg, systemText, convo, attempt) {
+    attempt = attempt || 0;
     // OpenAI doesn't accept Anthropic's image block shape; we convert.
     // For OpenAI, images are sent as image_url blocks with a data: URI.
     const messages = [{ role: "system", content: systemText }];
@@ -1065,6 +1159,14 @@
       },
       body: JSON.stringify({ model: cfg.model, messages }),
     });
+    if (res.status === 429 && attempt === 0) {
+      const wait = parseRetryAfter(res.headers.get("retry-after"), 30);
+      addSystemMessage(
+        "Hit OpenAI's rate limit. Waiting " + wait + "s and retrying once."
+      );
+      await sleep(wait * 1000);
+      return callOpenAI(cfg, systemText, convo, attempt + 1);
+    }
     if (!res.ok) {
       const errText = await res.text();
       throw new Error("OpenAI API " + res.status + ": " + truncate(errText, 500));
@@ -1222,6 +1324,24 @@
     });
   }
 
+  function bindOptions() {
+    const cb = $("#opt-include-replication");
+    if (!cb) return;
+    cb.checked = getIncludeReplication();
+    cb.addEventListener("change", () => {
+      setIncludeReplication(cb.checked);
+      if (cb.checked) {
+        addSystemMessage(
+          "Replication code will be attached to the next call. That call will " +
+          "be ~50k input tokens larger and may hit a Tier 1 rate limit; the " +
+          "widget retries once on 429."
+        );
+      } else {
+        addSystemMessage("Replication code is no longer in the system prompt.");
+      }
+    });
+  }
+
   function welcome() {
     addSystemMessage(
       "Ask any question about the paper. Try \"What's the main finding?\", " +
@@ -1247,6 +1367,7 @@
     installGlobalErrorHandler();
     bindSettings();
     bindInput();
+    bindOptions();
     welcome();
     loadBundle();
     if (!hasApiKey()) setTimeout(openKeyModal, 250);
