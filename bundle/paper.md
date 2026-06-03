@@ -1,3 +1,16 @@
+<!--
+This Markdown file is the runtime payload for the JFQA reader's-companion
+widget at https://whitesphd.github.io/paper-companion-jfqa-ipca/chat/.
+It is a derivative Markdown rendering of the published article, generated
+by the build pipeline in scripts/. Cite the canonical version (DOI below),
+not this file.
+-->
+
+> This is the runtime payload for the JFQA reader's-companion widget.
+> The canonical version of this paper is published Open Access under
+> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) at
+> <https://doi.org/10.1017/S0022109025102329> — please cite that, not this file.
+
 # Mispricing and Risk Compensation in Cryptocurrency Returns
 
 _Mykola Babiak and Daniele Bianchi_
