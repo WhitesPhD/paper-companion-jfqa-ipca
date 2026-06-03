@@ -988,6 +988,16 @@
     try { html = window.marked.parse(src); }
     catch (_) { return null; }
 
+    // Force every rendered link to open in a new tab. The widget is often
+    // embedded as an iframe (e.g., whitesphd.com/pub1); without target=_blank
+    // a click on a model-emitted URL loads the external page INSIDE the
+    // iframe, replacing the chat UI — the symptom is a "frozen" widget.
+    // The negative lookahead skips any <a> that already declares a target.
+    html = html.replace(
+      /<a (?![^>]*\btarget=)/g,
+      "<a target=\"_blank\" rel=\"noopener noreferrer\" "
+    );
+
     html = html.replace(/MATH(\d+)/g, (_m, idx) => {
       const block = blocks[parseInt(idx, 10)];
       if (!block) return "";
