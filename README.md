@@ -154,6 +154,30 @@ open/close handlers (×, outside-click, Escape). Two prerequisites:
 The iframe stays mounted between opens so chat state and the API key
 in `sessionStorage` persist within a single page visit.
 
+## Use of this repository
+
+### What forks are encouraged to do
+
+Clone this repo as a template, swap `bundle/` for your own paper's materials,
+edit `chat/index.html` for your paper's title and audience, and ship a
+companion widget for your own work. See "Adapting this for another paper"
+above for the workflow.
+
+### What you may not do
+
+- Host the Babiak–Bianchi paper materials (`bundle/paper.md`,
+  `bundle/figures/`, `bundle/replication.md`) without the CC BY 4.0
+  attribution intact, or in a way that suggests authorship by anyone other
+  than Mykola Babiak and Daniele Bianchi.
+- Modify the paper text or figures and present the modified version as the
+  original — CC BY 4.0 requires you to indicate that changes were made.
+- Use the paper materials in a way that implies endorsement by the authors
+  of a derivative product, service, or claim.
+
+The widget code in `chat/`, `scripts/`, and `eval/` is MIT-licensed and you
+may modify and redistribute it freely; legitimate forks rebundle a different
+paper, they don't strip the attribution and re-host this one.
+
 ## License
 
 Code in this repo — the widget (`chat/index.html`), the build scripts under
