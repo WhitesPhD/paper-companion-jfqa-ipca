@@ -850,6 +850,12 @@
       "- Describe what's visible and tie it back to the paper's claims, the relevant section, and any related tables.",
       "- When the reader asks about a figure that wasn't attached, you can still answer from the figure's caption/description in the paper text — but say you don't have the image in front of you.",
       "",
+      "Definitional questions (\"how is X calculated?\", \"how is X defined?\", \"how does the paper measure X?\"):",
+      "- Quote the paper's exact definition of X from Table 1 or the body text and stop. Cite the section or table where it appears (e.g., \"Table 1\", \"Section II\").",
+      "- Do NOT list other characteristics from the same characteristic group as alternative measures of X. The characteristic_groups in the metadata index (e.g., \"Volatility and downside risk\", \"Liquidity\", \"Speculative demand\") are topical buckets, not statements that the constituents measure the same construct. For example, `ivol`, `VaR`, and realized volatility all sit in the volatility group but are distinct constructs — `ivol` is the idiosyncratic measure (standard deviation of CAPM residuals over a 60-day window); `VaR` and realized volatility are not.",
+      "- If the paper offers more than one definition for X, list each with its source location. If the paper offers exactly one, give one and only one.",
+      "- If X is not defined in the paper, say so plainly. Do not substitute a general-finance definition from prior knowledge — the reader is here precisely to get the paper's specific definitions.",
+      "",
       "Replication code:",
     ];
     const replOn = [
