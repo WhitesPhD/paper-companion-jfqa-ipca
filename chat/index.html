@@ -981,8 +981,14 @@
     src = src.replace(/\$\$([\s\S]+?)\$\$/g, (_m, body) => pushMath(body, true));
     src = src.replace(/\\\[([\s\S]+?)\\\]/g, (_m, body) => pushMath(body, true));
     src = src.replace(/\\\(([\s\S]+?)\\\)/g, (_m, body) => pushMath(body, false));
+    // Inline $...$ math. The lookahead disambiguates math from currency
+    // ("$5,656") by requiring the closing $ to be followed by a word-boundary
+    // char. The set includes whitespace, punctuation, and the markdown
+    // structural delimiters | (table cell), * (bold/italic), and _ (italic)
+    // — without those, math inside table cells or **bolded** specifications
+    // like **$\Gamma_\alpha = 0$** is left as raw LaTeX.
     src = src.replace(
-      /\$([^\s$][^$\n]*?)\$(?=[\s.,;:!?)\]}'’"\-]|$)/g,
+      /\$([^\s$][^$\n]*?)\$(?=[\s.,;:!?)\]}'’"|*_\-]|$)/g,
       (_m, body) => pushMath(body, false),
     );
     src = src.replace(DLR_RE, () => "$");
